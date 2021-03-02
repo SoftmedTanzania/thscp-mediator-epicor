@@ -1,6 +1,7 @@
 # Epicor to Tanzania Health Supply Chain Mediator
 
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bb6abf220eea4bec8958de97c810eb5f)](https://app.codacy.com/gh/SoftmedTanzania/thscp-mediator-epicor?utm_source=github.com&utm_medium=referral&utm_content=SoftmedTanzania/thscp-mediator-epicor&utm_campaign=Badge_Grade_Settings)
 [![Java CI Badge](https://github.com/SoftmedTanzania/thscp-mediator-epicor/workflows/Java%20CI%20with%20Maven/badge.svg)](https://github.com/SoftmedTanzania/thscp-mediator-epicor/actions?query=workflow%3A%22Java+CI+with+Maven%22)
 [![Coverage Status](https://coveralls.io/repos/github/SoftmedTanzania/thscp-mediator-epicor/badge.svg?branch=development)](https://coveralls.io/github/SoftmedTanzania/thscp-mediator-epicor?branch=development)
 
