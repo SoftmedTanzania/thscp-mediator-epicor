@@ -65,7 +65,9 @@ The configuration parameters specific to the mediator and the mediator's metadat
           "name": "THSCP-Mediator-Epicor",
           "urlPattern": "^/thscp$",
           "type": "http",
-          "allow": ["thscp-mediator-epicor"],
+          "allow": [
+            "thscp-mediator-epicor"
+          ],
           "routes": [
             {
               "name": "THSCP-Mediator-Epicor Route",
@@ -106,11 +108,11 @@ The configuration parameters specific to the mediator and the mediator's metadat
             {
               "param": "destinationScheme",
               "displayName": "Destination Scheme",
-              "description": "Whether the destination is using LLP or SLLP requests.",
+              "description": "Whether the destination is using HTTP or HTTPS requests.",
               "type": "option",
               "values": [
-                "llp",
-                "sllp"
+                "http",
+                "https"
               ]
             },
             {
