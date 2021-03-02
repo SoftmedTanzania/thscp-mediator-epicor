@@ -62,11 +62,11 @@ The configuration parameters specific to the mediator and the mediator's metadat
       ],
       "defaultChannelConfig": [
         {
-          "name": "THSCP-Mediator-Epicor",
+          "name": "Epicor - THSCP Channel",
           "urlPattern": "^/thscp$",
           "type": "http",
           "allow": [
-            "thscp-mediator-epicor"
+            "thscp-mediator-epicor-role"
           ],
           "routes": [
             {
