@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.testing.MockHTTPConnector;
 import tz.go.moh.him.thscp.mediator.epicor.domain.HealthCommoditiesFundingRequest;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.HealthCommoditiesFundingOrchestrator;
 
 import java.io.IOException;
 import java.io.InputStream;

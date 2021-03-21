@@ -1,7 +1,6 @@
 package tz.go.moh.him.thscp.mediator.epicor.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
-import scala.Int;
 
 public class HealthCommoditiesFundingRequest {
     @JsonProperty("uuid")
@@ -23,10 +22,6 @@ public class HealthCommoditiesFundingRequest {
     @JsonProperty("facilityId")
     @SerializedName("facilityId")
     private String facilityId;
-
-    @JsonProperty("description")
-    @SerializedName("description")
-    private String description;
 
     @JsonProperty("productCode")
     @SerializedName("productCode")

@@ -11,7 +11,7 @@
     "PRODUCT_CODE_IS_BLANK": "Validation failed. productCode must not be blank",
     "PROGRAM_IS_BLANK": "Validation failed. Program must not be blank",
     "SOURCE_IS_BLANK": "Validation failed. source must not be blank",
-    "START_DATE_IS_BLANK": "Validation failed. startDate must not be blank",
+    "START_DATE_IS_BLANK": "Validation failed. startDate must not be blank"
   },
   "PROCUREMENT_SUPPLY_PLAN_ERROR_MESSAGES":{
     "ERROR_INVALID_PAYLOAD": "Error the payload is invalid",
@@ -30,7 +30,7 @@
     "PRODUCT_CODE_IS_BLANK": "Validation failed. productCode must not be blank",
     "RECEIVED_AMOUNT_IS_BLANK": "Validation failed. receivedAmount must not be blank",
     "RECEIVED_DATE_IS_BLANK": "Validation failed. receivedDate must not be blank",
-    "STATUS_IS_BLANK": "Validation failed. status must not be blank",
+    "STATUS_IS_BLANK": "Validation failed. status must not be blank"
   }
 
 }
