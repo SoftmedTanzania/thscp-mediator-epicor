@@ -5,10 +5,17 @@
   "description": "A mediator for handling system integration between Epicor and THSCP",
   "endpoints": [
     {
-      "name": "THSCP-Mediator-Epicor Route",
+      "name": "Health Commodities Funding Route",
       "host": "localhost",
       "port": "3021",
       "path": "/health-commodities-funding",
+      "type": "http"
+    },
+    {
+      "name": "Procurement Supply Plan Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/procurement-supply-plan",
       "type": "http"
     }
   ],
@@ -18,14 +25,22 @@
       "urlPattern": "^/thscp$",
       "type": "http",
       "allow": [
-        "thscp-mediator-epicor-role"
+        "epicor-role"
       ],
       "routes": [
         {
-          "name": "THSCP-Mediator-Epicor Route",
+          "name": "Health Commodities Funding Route",
           "host": "localhost",
-          "port": "3018",
+          "port": "3021",
           "path": "/health-commodities-funding",
+          "type": "http",
+          "primary": "true"
+        },
+        {
+          "name": "Procurement Supply Plan Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/procurement-supply-plan",
           "type": "http",
           "primary": "true"
         }

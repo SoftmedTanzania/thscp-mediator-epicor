@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import tz.go.moh.him.thscp.mediator.epicor.orchestrator.HealthCommoditiesFundingOrchestrator;
+import tz.go.moh.him.thscp.mediator.epicor.orchestrator.ProcurementSupplyPlanOrchestrator;
 
 public class MediatorMain {
 
@@ -20,6 +21,7 @@ public class MediatorMain {
         //TODO Configure routes here
         //...
         routingTable.addRoute("/health-commodities-funding", HealthCommoditiesFundingOrchestrator.class);
+        routingTable.addRoute("/procurement-supply-plan", ProcurementSupplyPlanOrchestrator.class);
 
         return routingTable;
     }
