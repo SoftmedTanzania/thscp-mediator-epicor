@@ -1,3 +1,36 @@
 {
-  "ERR01": ""
+  "HEALTH_COMMODITIES_FUNDING_ERROR_MESSAGES":{
+    "ERROR_INVALID_PAYLOAD": "Error the payload is invalid",
+    "ERROR_START_DATE_INVALID_FORMAT": "Start date is in an invalid format",
+    "ERROR_START_DATE_IS_NOT_VALID_PAST_DATE": "Start date is not a valid past date",
+    "UUID_IS_BLANK": "Validation failed. UUID must not be blank",
+    "ALLOCATED_FUND_IS_BLANK": "Validation failed. allocatedFund must not be blank",
+    "DISBURSED_FUND_IS_BLANK": "Validation failed.disbursedFund must not be blank",
+    "END_DATE_IS_BLANK": "Validation failed. endDate must not be blank",
+    "FACILITY_ID_IS_BLANK": "Validation failed. facilityId must not be blank",
+    "PRODUCT_CODE_IS_BLANK": "Validation failed. productCode must not be blank",
+    "PROGRAM_IS_BLANK": "Validation failed. Program must not be blank",
+    "SOURCE_IS_BLANK": "Validation failed. source must not be blank",
+    "START_DATE_IS_BLANK": "Validation failed. startDate must not be blank",
+  },
+  "PROCUREMENT_SUPPLY_PLAN_ERROR_MESSAGES":{
+    "ERROR_INVALID_PAYLOAD": "Error the payload is invalid",
+    "ERROR_CONTRACT_DATE_INVALID_FORMAT": "Contract date is in an invalid format",
+    "ERROR_CONTRACT_DATE_IS_NOT_VALID_PAST_DATE": "Contract date is not a valid past date",
+    "ERROR_ORDER_DATE_INVALID_FORMAT": "Order date is in an invalid format",
+    "ERROR_ORDER_DATE_IS_NOT_VALID_PAST_DATE": "Order date is not a valid past date",
+    "UUID_IS_BLANK": "Validation failed. UUID must not be blank",
+    "CONTRACT_DATE_IS_BLANK": "Validation failed. contractDate must not be blank",
+    "CURRENCY_IS_BLANK": "Validation failed.currency must not be blank",
+    "LOT_AMOUNT_IS_BLANK": "Validation failed. lotAmount must not be blank",
+    "MEASURE_UNIT_IS_BLANK": "Validation failed. measureUnit must not be blank",
+    "ORDER_DATE_IS_BLANK": "Validation failed. OrderDate must not be blank",
+    "ORDER_ID_BLANK": "Validation failed. orderId must not be blank",
+    "ORDER_QUANTITY_IS_BLANK": "Validation failed. orderQuantity must not be blank",
+    "PRODUCT_CODE_IS_BLANK": "Validation failed. productCode must not be blank",
+    "RECEIVED_AMOUNT_IS_BLANK": "Validation failed. receivedAmount must not be blank",
+    "RECEIVED_DATE_IS_BLANK": "Validation failed. receivedDate must not be blank",
+    "STATUS_IS_BLANK": "Validation failed. status must not be blank",
+  }
+
 }

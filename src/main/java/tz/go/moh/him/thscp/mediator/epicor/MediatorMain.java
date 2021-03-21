@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import tz.go.moh.him.thscp.mediator.epicor.orchestrator.HealthCommoditiesFundingOrchestrator;
 
 public class MediatorMain {
 
@@ -18,7 +19,7 @@ public class MediatorMain {
 
         //TODO Configure routes here
         //...
-        routingTable.addRoute("/thscp", DefaultOrchestrator.class);
+        routingTable.addRoute("/health-commodities-funding", HealthCommoditiesFundingOrchestrator.class);
 
         return routingTable;
     }

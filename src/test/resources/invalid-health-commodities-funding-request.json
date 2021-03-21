@@ -1,0 +1,13 @@
+[
+  {
+    "uuid": "",
+    "allocatedFund":30000,
+    "disbursedFund": 100000,
+    "endDate": "",
+    "facilityId": "123456",
+    "productCode": "10020035MD",
+    "program": "COVID-19",
+    "source": "GOT",
+    "startDate": "2020-12-03"
+  }
+]
