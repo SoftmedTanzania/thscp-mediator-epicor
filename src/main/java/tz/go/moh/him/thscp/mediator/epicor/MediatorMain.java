@@ -10,8 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.HealthCommoditiesFundingOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.ProcurementSupplyPlanOrchestrator;
+
+import tz.go.moh.him.thscp.mediator.epicor.orchestrator.*;
 
 public class MediatorMain {
 
@@ -22,6 +22,14 @@ public class MediatorMain {
         //...
         routingTable.addRoute("/health-commodities-funding", HealthCommoditiesFundingOrchestrator.class);
         routingTable.addRoute("/procurement-supply-plan", ProcurementSupplyPlanOrchestrator.class);
+        routingTable.addRoute("/product-recall-alerts", ProductRecallAlertsOrchestrator.class);
+        routingTable.addRoute("/emergency-supply-chain-commodities-stock-status", EmergencySupplyChainCommoditiesStockStatusOrchestrator.class);
+        routingTable.addRoute("/item-fill-rate", ItemFillRateOrchestrator.class);
+        routingTable.addRoute("/percentage-health-facilities-staff", PercentageHealthFacilitiesStaffOrchestrator.class);
+        routingTable.addRoute("/dos-product", DosProductOrchestrator.class);
+        routingTable.addRoute("/stock-on-hand-percentage-wastage", StockOnHandPercentageWastageOrchestrator.class);
+        routingTable.addRoute("/stock-availability", StockAvailabilityOrchestrator.class);
+        routingTable.addRoute("/program-list", ProgramListOrchestrator.class);
 
         return routingTable;
     }

@@ -14,12 +14,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
-
-public class HealthCommoditiesFundingOrchestratorTest extends BaseTest {
+public class DosProductOrchestratorTest extends BaseTest{
 
     /**
      * Represents an Error Messages Definition Resource Object defined in <a href="file:../resources/error-messages.json">/resources/error-messages.json</a>.
@@ -65,12 +64,12 @@ public class HealthCommoditiesFundingOrchestratorTest extends BaseTest {
     public void testMediatorHTTPRequest() throws Exception {
         assertNotNull(testConfig);
         new JavaTestKit(system) {{
-            InputStream stream = HealthCommoditiesFundingOrchestratorTest.class.getClassLoader().getResourceAsStream("health-commodities-funding.json");
+            InputStream stream = DosProductOrchestratorTest.class.getClassLoader().getResourceAsStream("dos-product-request.json");
 
             assertNotNull(stream);
 
 
-            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), HealthCommoditiesFundingOrchestrator.class, "/irims-thscp");
+            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), DosProductOrchestrator.class, "/dos-product");
 
             final Object[] out =
                     new ReceiveWhile<Object>(Object.class, duration("1 second")) {
@@ -105,11 +104,11 @@ public class HealthCommoditiesFundingOrchestratorTest extends BaseTest {
         assertNotNull(testConfig);
 
         new JavaTestKit(system) {{
-            InputStream stream = HealthCommoditiesFundingOrchestratorTest.class.getClassLoader().getResourceAsStream("invalid-health-commodities-funding-request.json");
+            InputStream stream = DosProductOrchestratorTest.class.getClassLoader().getResourceAsStream("invalid-dos-product-request.json");
 
             assertNotNull(stream);
 
-            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), HealthCommoditiesFundingOrchestrator.class, "/health-commodities-funding");
+            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), DosProductOrchestrator.class, "/dos-product");
 
             final Object[] out =
                     new ReceiveWhile<Object>(Object.class, duration("1 second")) {
@@ -135,7 +134,7 @@ public class HealthCommoditiesFundingOrchestratorTest extends BaseTest {
 
             assertEquals(400, responseStatus);
             assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"),"uuid")));
-            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "endDate")));
+            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "category")));
         }};
     }
 
@@ -145,11 +144,11 @@ public class HealthCommoditiesFundingOrchestratorTest extends BaseTest {
         assertNotNull(testConfig);
 
         new JavaTestKit(system) {{
-            InputStream stream = HealthCommoditiesFundingOrchestratorTest.class.getClassLoader().getResourceAsStream("invalid-dates-health-commodities-funding-request.json");
+            InputStream stream = DosProductOrchestratorTest.class.getClassLoader().getResourceAsStream("invalid-dates-dos-product-request.json");
 
             assertNotNull(stream);
 
-            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), HealthCommoditiesFundingOrchestrator.class, "/health-commodities-funding");
+            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), DosProductOrchestrator.class, "/dos-product");
 
             final Object[] out =
                     new ReceiveWhile<Object>(Object.class, duration("1 second")) {
@@ -174,7 +173,7 @@ public class HealthCommoditiesFundingOrchestratorTest extends BaseTest {
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"startDate"), "2022-05-05")));
+            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"period"), "2022-05-05")));
         }};
 
     }

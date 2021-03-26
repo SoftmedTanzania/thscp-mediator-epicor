@@ -10,6 +10,7 @@ import org.openhim.mediator.engine.testing.MockLauncher;
 import org.openhim.mediator.engine.testing.TestingUtils;
 import tz.go.moh.him.thscp.mediator.epicor.mock.MockDestination;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,8 +32,14 @@ public class ProcurementSupplyPlanOrchestratorTest extends BaseTest{
     @Override
     public void before() throws Exception {
         super.before();
-
-        thscpErrorMessageResource = errorMessageResource.getJSONObject("PROCUREMENT_SUPPLY_PLAN_ERROR_MESSAGES");
+        InputStream stream = getClass().getClassLoader().getResourceAsStream("error-messages.json");
+        try {
+            if (stream != null) {
+                thscpErrorMessageResource = new JSONObject(IOUtils.toString(stream));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         List<MockLauncher.ActorToLaunch> toLaunch = new LinkedList<>();
         toLaunch.add(new MockLauncher.ActorToLaunch("http-connector", MockDestination.class));
         TestingUtils.launchActors(system, testConfig.getName(), toLaunch);
@@ -57,7 +64,7 @@ public class ProcurementSupplyPlanOrchestratorTest extends BaseTest{
     public void testMediatorHTTPRequest() throws Exception {
         assertNotNull(testConfig);
         new JavaTestKit(system) {{
-            InputStream stream = ProcurementSupplyPlanOrchestratorTest.class.getClassLoader().getResourceAsStream("procurement-supply-plan.json");
+            InputStream stream = ProcurementSupplyPlanOrchestratorTest.class.getClassLoader().getResourceAsStream("procurement-supply-plan-request.json");
 
             assertNotNull(stream);
 
@@ -126,8 +133,8 @@ public class ProcurementSupplyPlanOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(thscpErrorMessageResource.getString("UUID_IS_BLANK")));
-            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("CONTRACT_DATE_IS_BLANK"), "")));
+            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"),"uuid")));
+            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "contractDate")));
         }};
     }
 
@@ -166,7 +173,7 @@ public class ProcurementSupplyPlanOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("ERROR_CONTRACT_DATE_IS_NOT_VALID_PAST_DATE"), "2022-05-05")));
+            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"contractDate"), "2022-05-05")));
         }};
 
     }

@@ -1,0 +1,19 @@
+
+[
+  {
+    "uuid": "5821daab-b583-4abf-a8b0-f0a6c414d7a5",
+    "consumedQuantity": 10,
+    "facilityId": "106091-2",
+    "facilityLevel": 0,
+    "monthsOfStock": 10,
+    "period": "2025-12-07",
+    "productCode": "PR-01",
+    "programCode": "PC-01",
+    "quantity": 100,
+    "stockId": "001",
+    "damagedPercentage": 30.00,
+    "expiredPercentage": 30.00,
+    "lostPercentage": "40.00"
+  }
+]
+
