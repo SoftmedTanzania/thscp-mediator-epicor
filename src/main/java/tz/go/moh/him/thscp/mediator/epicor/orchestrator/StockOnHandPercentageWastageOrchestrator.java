@@ -1,38 +1,21 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
 
-import akka.actor.ActorSelection;
-import akka.actor.UntypedActor;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpStatus;
 import org.codehaus.plexus.util.StringUtils;
-import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
-import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
-import tz.go.moh.him.thscp.mediator.epicor.domain.StockAvailabilityRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.StockOnHandPercentageWastageRequest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
 
@@ -93,53 +76,52 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "uuid"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockOnHandPercentageWastageRequest.getConsumedQuantity())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"consumedQuantity"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "consumedQuantity"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockOnHandPercentageWastageRequest.getDamagedPercentage())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"damagedPercentage"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "damagedPercentage"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockOnHandPercentageWastageRequest.getExpiredPercentage())))
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "expiredPercentage"), null));
 
         if (StringUtils.isBlank(stockOnHandPercentageWastageRequest.getFacilityId()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"facilityId"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "facilityId"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockOnHandPercentageWastageRequest.getLostPercentage())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"lostPercentage"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "lostPercentage"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockOnHandPercentageWastageRequest.getFacilityLevel())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"facilityLevel"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "facilityLevel"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockOnHandPercentageWastageRequest.getMonthsOfStock())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"monthsOfStock"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "monthsOfStock"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockOnHandPercentageWastageRequest.getPeriod())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"period"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "period"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockOnHandPercentageWastageRequest.getProductCode())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"productCode"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
 
         if (StringUtils.isBlank(stockOnHandPercentageWastageRequest.getProgramCode()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"programCode"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "programCode"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockOnHandPercentageWastageRequest.getQuantity())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"quantity"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "quantity"), null));
 
         if (StringUtils.isBlank(stockOnHandPercentageWastageRequest.getStockId()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"stockId"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "stockId"), null));
 
 
         try {
             if (!DateValidatorUtils.isValidPastDate(stockOnHandPercentageWastageRequest.getPeriod(), checkDateFormatStrings(stockOnHandPercentageWastageRequest.getPeriod()))) {
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"period"), null));
-            }
-            else{
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "period"), null));
+            } else {
                 SimpleDateFormat stockOnHandPercentageWastageDateFormat = new SimpleDateFormat(checkDateFormatStrings(stockOnHandPercentageWastageRequest.getPeriod()));
                 stockOnHandPercentageWastageRequest.setPeriod(thscpDateFormat.format(stockOnHandPercentageWastageDateFormat.parse(stockOnHandPercentageWastageRequest.getPeriod())));
 
             }
         } catch (ParseException e) {
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"),"period"),null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"), "period"), null));
         }
 
         return resultDetailsList;
@@ -147,8 +129,7 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
 
     @Override
     public void onReceive(Object msg) {
-        if (msg instanceof MediatorHTTPRequest)
-        {
+        if (msg instanceof MediatorHTTPRequest) {
             workingRequest = (MediatorHTTPRequest) msg;
 
             log.info("Received request: " + workingRequest.getHost() + " " + workingRequest.getMethod() + " " + workingRequest.getPath());
@@ -182,7 +163,7 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
                 validatedObjects = validateData(stockOnHandPercentageWastageRequestList);
             }
 
-            log.info("validated object is" +new Gson().toJson(validatedObjects));
+            log.info("validated object is" + new Gson().toJson(validatedObjects));
 
             sendDataToThscp(new Gson().toJson(validatedObjects));
         } else if (msg instanceof MediatorHTTPResponse) { //respond
@@ -195,7 +176,7 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
 
 
     protected List<StockOnHandPercentageWastageRequest> convertMessageBodyToPojoList(String msg) throws JsonSyntaxException {
-        List<StockOnHandPercentageWastageRequest> stockOnHandPercentageWastageRequestList = Arrays.asList(serializer.deserialize(msg,StockOnHandPercentageWastageRequest[].class));
+        List<StockOnHandPercentageWastageRequest> stockOnHandPercentageWastageRequestList = Arrays.asList(serializer.deserialize(msg, StockOnHandPercentageWastageRequest[].class));
         return stockOnHandPercentageWastageRequestList;
     }
 

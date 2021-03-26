@@ -58,133 +58,107 @@ public class ProcurementSupplyPlanRequest {
     private String supplierId;
 
 
-    public String getUuid()
-    {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid)
-    {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
-    public String getContractDate()
-    {
+    public String getContractDate() {
         return contractDate;
     }
 
-    public void setContractDate(String contractDate)
-    {
+    public void setContractDate(String contractDate) {
         this.contractDate = contractDate;
     }
 
-    public String getCurrency()
-    {
+    public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency)
-    {
+    public void setCurrency(String currency) {
         this.currency = currency;
     }
 
-    public int getLotAmount()
-    {
+    public int getLotAmount() {
         return lotAmount;
     }
 
-    public void setLotAmount(int lotAmount)
-    {
+    public void setLotAmount(int lotAmount) {
         this.lotAmount = lotAmount;
     }
 
-    public String getMeasureUnit()
-    {
+    public String getMeasureUnit() {
         return measureUnit;
     }
 
-    public void setMeasureUnit(String measureUnit)
-    {
+    public void setMeasureUnit(String measureUnit) {
         this.measureUnit = measureUnit;
     }
 
-    public String getOrderDate()
-    {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(String orderDate)
-    {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
-    public String getOrderId()
-    {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId)
-    {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
-    public int getOrderQuantity()
-    {
+    public int getOrderQuantity() {
         return orderQuantity;
     }
 
-    public void setOrderQuantity(int orderQuantity)
-    {
+    public void setOrderQuantity(int orderQuantity) {
         this.orderQuantity = orderQuantity;
     }
 
-    public String getProductCode()
-    {
+    public String getProductCode() {
         return productCode;
     }
 
-    public void setProductCode(String productCode)
-    {
+    public void setProductCode(String productCode) {
         this.productCode = productCode;
     }
 
-    public int getReceivedAmount()
-    {
+    public int getReceivedAmount() {
         return receivedAmount;
     }
 
-    public void setReceivedAmount(int receivedAmount)
-    {
+    public void setReceivedAmount(int receivedAmount) {
         this.receivedAmount = receivedAmount;
     }
 
-    public String getReceivedDate()
-    {
+    public String getReceivedDate() {
         return receivedDate;
     }
 
-    public void setReceivedDate(String receivedDate)
-    {
+    public void setReceivedDate(String receivedDate) {
         this.receivedDate = receivedDate;
     }
 
-    public int getStatus()
-    {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(int status)
-    {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public String getSupplierId()
-    {
+    public String getSupplierId() {
         return supplierId;
     }
 
-    public void setSupplierId(String supplierId)
-    {
+    public void setSupplierId(String supplierId) {
         this.supplierId = supplierId;
     }
 

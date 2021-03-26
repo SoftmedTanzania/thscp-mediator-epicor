@@ -1,38 +1,23 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
 
-import akka.actor.ActorSelection;
-import akka.actor.UntypedActor;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpStatus;
 import org.codehaus.plexus.util.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
-import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
-import tz.go.moh.him.thscp.mediator.epicor.domain.EmergencySupplyChainCommoditiesStockStatusRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.HealthCommoditiesFundingRequest;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class HealthCommoditiesFundingOrchestrator extends BaseOrchestrator{
+public class HealthCommoditiesFundingOrchestrator extends BaseOrchestrator {
 
     /**
      * Initializes a new instance of the {@link HealthCommoditiesFundingOrchestrator} class.
@@ -90,41 +75,40 @@ public class HealthCommoditiesFundingOrchestrator extends BaseOrchestrator{
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "uuid"), null));
 
         if (StringUtils.isBlank(String.valueOf(healthCommoditiesFundingRequest.getAllocatedFund())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"allocatedFund"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "allocatedFund"), null));
 
         if (StringUtils.isBlank(String.valueOf(healthCommoditiesFundingRequest.getDisbursedFund())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"disbursedFund"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "disbursedFund"), null));
 
         if (StringUtils.isBlank(healthCommoditiesFundingRequest.getEndDate()))
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "endDate"), null));
 
         if (StringUtils.isBlank(healthCommoditiesFundingRequest.getFacilityId()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"facilityId"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "facilityId"), null));
 
         if (StringUtils.isBlank(String.valueOf(healthCommoditiesFundingRequest.getProductCode())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"productCode"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
 
         if (StringUtils.isBlank(healthCommoditiesFundingRequest.getProgram()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"program"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "program"), null));
 
         if (StringUtils.isBlank(healthCommoditiesFundingRequest.getSource()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"source"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "source"), null));
 
         if (StringUtils.isBlank(String.valueOf(healthCommoditiesFundingRequest.getStartDate())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"startDate"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "startDate"), null));
 
 
         try {
             if (!DateValidatorUtils.isValidPastDate(healthCommoditiesFundingRequest.getStartDate(), checkDateFormatStrings(healthCommoditiesFundingRequest.getStartDate()))) {
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"startDate"), null));
-            }
-            else{
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "startDate"), null));
+            } else {
                 SimpleDateFormat healthCommodityFundingDateFormat = new SimpleDateFormat(checkDateFormatStrings(healthCommoditiesFundingRequest.getStartDate()));
                 healthCommoditiesFundingRequest.setStartDate(thscpDateFormat.format(healthCommodityFundingDateFormat.parse(healthCommoditiesFundingRequest.getStartDate())));
 
             }
         } catch (ParseException e) {
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"),"startDate"),null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"), "startDate"), null));
         }
 
         return resultDetailsList;
@@ -132,8 +116,7 @@ public class HealthCommoditiesFundingOrchestrator extends BaseOrchestrator{
 
     @Override
     public void onReceive(Object msg) {
-        if (msg instanceof MediatorHTTPRequest)
-        {
+        if (msg instanceof MediatorHTTPRequest) {
             workingRequest = (MediatorHTTPRequest) msg;
 
             log.info("Received request: " + workingRequest.getHost() + " " + workingRequest.getMethod() + " " + workingRequest.getPath());
@@ -167,7 +150,7 @@ public class HealthCommoditiesFundingOrchestrator extends BaseOrchestrator{
                 validatedObjects = validateData(healthCommoditiesFundingRequestList);
             }
 
-            log.info("validated object is" +new Gson().toJson(validatedObjects));
+            log.info("validated object is" + new Gson().toJson(validatedObjects));
 
             sendDataToThscp(new Gson().toJson(validatedObjects));
         } else if (msg instanceof MediatorHTTPResponse) { //respond
@@ -179,7 +162,7 @@ public class HealthCommoditiesFundingOrchestrator extends BaseOrchestrator{
     }
 
     protected List<HealthCommoditiesFundingRequest> convertMessageBodyToPojoList(String msg) throws JsonSyntaxException {
-        List<HealthCommoditiesFundingRequest> healthCommoditiesFundingRequestList = Arrays.asList(serializer.deserialize(msg,HealthCommoditiesFundingRequest[].class));
+        List<HealthCommoditiesFundingRequest> healthCommoditiesFundingRequestList = Arrays.asList(serializer.deserialize(msg, HealthCommoditiesFundingRequest[].class));
         return healthCommoditiesFundingRequestList;
     }
 

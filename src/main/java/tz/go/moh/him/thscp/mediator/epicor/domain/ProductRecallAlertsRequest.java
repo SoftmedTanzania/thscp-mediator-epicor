@@ -57,133 +57,107 @@ public class ProductRecallAlertsRequest {
     @SerializedName("unit")
     private String unit;
 
-    public String getActionRequired()
-    {
+    public String getActionRequired() {
         return actionRequired;
     }
 
-    public void setActionRequired(String actionRequired)
-    {
+    public void setActionRequired(String actionRequired) {
         this.actionRequired = actionRequired;
     }
 
-    public String getAffectedCommunity()
-    {
+    public String getAffectedCommunity() {
         return affectedCommunity;
     }
 
-    public void setAffectedCommunity(String affectedCommunity)
-    {
+    public void setAffectedCommunity(String affectedCommunity) {
         this.affectedCommunity = affectedCommunity;
     }
 
-    public String getBatchNumber()
-    {
+    public String getBatchNumber() {
         return batchNumber;
     }
 
-    public void setBatchNumber(String batchNumber)
-    {
+    public void setBatchNumber(String batchNumber) {
         this.batchNumber = batchNumber;
     }
 
-    public String getClosureDate()
-    {
+    public String getClosureDate() {
         return closureDate;
     }
 
-    public void setClosureDate(String closureDate)
-    {
+    public void setClosureDate(String closureDate) {
         this.closureDate = closureDate;
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public int getDistributedQuantity()
-    {
+    public int getDistributedQuantity() {
         return distributedQuantity;
     }
 
-    public void setDistributedQuantity(int distributedQuantity)
-    {
+    public void setDistributedQuantity(int distributedQuantity) {
         this.distributedQuantity = distributedQuantity;
     }
 
-    public String getIssue()
-    {
+    public String getIssue() {
         return issue;
     }
 
-    public void setIssue(String issue)
-    {
+    public void setIssue(String issue) {
         this.issue = issue;
     }
 
-    public String getRecallDate()
-    {
+    public String getRecallDate() {
         return recallDate;
     }
 
-    public void setRecallDate(String recallDate)
-    {
+    public void setRecallDate(String recallDate) {
         this.recallDate = recallDate;
     }
 
-    public int getRecallFrequency()
-    {
+    public int getRecallFrequency() {
         return recallFrequency;
     }
 
-    public void setRecallFrequency(int recallFrequency)
-    {
+    public void setRecallFrequency(int recallFrequency) {
         this.recallFrequency = recallFrequency;
     }
 
-    public int getRecalledQuantity()
-    {
+    public int getRecalledQuantity() {
         return recalledQuantity;
     }
 
-    public void setRecalledQuantity(int recalledQuantity)
-    {
+    public void setRecalledQuantity(int recalledQuantity) {
         this.recalledQuantity = recalledQuantity;
     }
 
-    public int getReceivedQuantity()
-    {
+    public int getReceivedQuantity() {
         return receivedQuantity;
     }
 
-    public void setReceivedQuantity(int receivedQuantity)
-    {
+    public void setReceivedQuantity(int receivedQuantity) {
         this.receivedQuantity = receivedQuantity;
     }
 
-    public String getStartDate()
-    {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate)
-    {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public String getUnit()
-    {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit)
-    {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 }

@@ -1,37 +1,18 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
 
-import akka.actor.ActorSelection;
-import akka.actor.UntypedActor;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpStatus;
 import org.codehaus.plexus.util.StringUtils;
-import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
-import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
-import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
-import tz.go.moh.him.thscp.mediator.epicor.domain.ProductRecallAlertsRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.ProgramListRequest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ProgramListOrchestrator extends BaseOrchestrator {
 
@@ -91,10 +72,10 @@ public class ProgramListOrchestrator extends BaseOrchestrator {
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "uuid"), null));
 
         if (StringUtils.isBlank(String.valueOf(programListRequest.getDescription())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"description"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "description"), null));
 
         if (StringUtils.isBlank(String.valueOf(programListRequest.getName())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"name"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "name"), null));
 
         if (StringUtils.isBlank(programListRequest.getProgramCode()))
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "programCode"), null));
@@ -104,8 +85,7 @@ public class ProgramListOrchestrator extends BaseOrchestrator {
 
     @Override
     public void onReceive(Object msg) {
-        if (msg instanceof MediatorHTTPRequest)
-        {
+        if (msg instanceof MediatorHTTPRequest) {
             workingRequest = (MediatorHTTPRequest) msg;
 
             log.info("Received request: " + workingRequest.getHost() + " " + workingRequest.getMethod() + " " + workingRequest.getPath());
@@ -139,7 +119,7 @@ public class ProgramListOrchestrator extends BaseOrchestrator {
                 validatedObjects = validateData(programListRequestList);
             }
 
-            log.info("validated object is" +new Gson().toJson(validatedObjects));
+            log.info("validated object is" + new Gson().toJson(validatedObjects));
 
             sendDataToThscp(new Gson().toJson(validatedObjects));
         } else if (msg instanceof MediatorHTTPResponse) { //respond
@@ -151,7 +131,7 @@ public class ProgramListOrchestrator extends BaseOrchestrator {
     }
 
     protected List<ProgramListRequest> convertMessageBodyToPojoList(String msg) throws JsonSyntaxException {
-        List<ProgramListRequest> programListRequestList = Arrays.asList(serializer.deserialize(msg,ProgramListRequest[].class));
+        List<ProgramListRequest> programListRequestList = Arrays.asList(serializer.deserialize(msg, ProgramListRequest[].class));
         return programListRequestList;
     }
 }

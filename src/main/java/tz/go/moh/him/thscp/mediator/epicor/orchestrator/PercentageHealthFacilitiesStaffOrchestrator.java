@@ -1,38 +1,21 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
 
-import akka.actor.ActorSelection;
-import akka.actor.UntypedActor;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpStatus;
 import org.codehaus.plexus.util.StringUtils;
-import org.glassfish.grizzly.compression.lzma.impl.Base;
-import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
-import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
-import tz.go.moh.him.thscp.mediator.epicor.domain.ItemFillRateRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.PercentageHealthFacilitiesStaffRequest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PercentageHealthFacilitiesStaffOrchestrator extends BaseOrchestrator {
 
@@ -92,34 +75,33 @@ public class PercentageHealthFacilitiesStaffOrchestrator extends BaseOrchestrato
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "uuid"), null));
 
         if (StringUtils.isBlank(String.valueOf(percentageHealthFacilitiesStaffRequest.getFacilityId())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"facilityId"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "facilityId"), null));
 
         if (StringUtils.isBlank(percentageHealthFacilitiesStaffRequest.getPeriod()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"period"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "period"), null));
 
         if (StringUtils.isBlank(percentageHealthFacilitiesStaffRequest.getPostId()))
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "postId"), null));
 
         if (StringUtils.isBlank(percentageHealthFacilitiesStaffRequest.getPostName()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"postName"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "postName"), null));
 
         if (StringUtils.isBlank(String.valueOf(percentageHealthFacilitiesStaffRequest.getTotalPost())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"totalPost"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "totalPost"), null));
 
         if (StringUtils.isBlank(percentageHealthFacilitiesStaffRequest.getVacantPost()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"vacantPost"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "vacantPost"), null));
 
         try {
             if (!DateValidatorUtils.isValidPastDate(percentageHealthFacilitiesStaffRequest.getPeriod(), checkDateFormatStrings(percentageHealthFacilitiesStaffRequest.getPeriod()))) {
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"period"), null));
-            }
-            else{
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "period"), null));
+            } else {
                 SimpleDateFormat percentageHealthFacilitiesStaffDateFormat = new SimpleDateFormat(checkDateFormatStrings(percentageHealthFacilitiesStaffRequest.getPeriod()));
                 percentageHealthFacilitiesStaffRequest.setPeriod(thscpDateFormat.format(percentageHealthFacilitiesStaffDateFormat.parse(percentageHealthFacilitiesStaffRequest.getPeriod())));
 
             }
         } catch (ParseException e) {
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"),"period"),null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"), "period"), null));
         }
 
         return resultDetailsList;
@@ -127,8 +109,7 @@ public class PercentageHealthFacilitiesStaffOrchestrator extends BaseOrchestrato
 
     @Override
     public void onReceive(Object msg) {
-        if (msg instanceof MediatorHTTPRequest)
-        {
+        if (msg instanceof MediatorHTTPRequest) {
             workingRequest = (MediatorHTTPRequest) msg;
 
             log.info("Received request: " + workingRequest.getHost() + " " + workingRequest.getMethod() + " " + workingRequest.getPath());
@@ -162,7 +143,7 @@ public class PercentageHealthFacilitiesStaffOrchestrator extends BaseOrchestrato
                 validatedObjects = validateData(percentageHealthFacilitiesStaffRequestList);
             }
 
-            log.info("validated object is" +new Gson().toJson(validatedObjects));
+            log.info("validated object is" + new Gson().toJson(validatedObjects));
 
             sendDataToThscp(new Gson().toJson(validatedObjects));
         } else if (msg instanceof MediatorHTTPResponse) { //respond
@@ -174,7 +155,7 @@ public class PercentageHealthFacilitiesStaffOrchestrator extends BaseOrchestrato
     }
 
     protected List<PercentageHealthFacilitiesStaffRequest> convertMessageBodyToPojoList(String msg) throws JsonSyntaxException {
-        List<PercentageHealthFacilitiesStaffRequest> percentageHealthFacilitiesStaffRequestList = Arrays.asList(serializer.deserialize(msg,PercentageHealthFacilitiesStaffRequest[].class));
+        List<PercentageHealthFacilitiesStaffRequest> percentageHealthFacilitiesStaffRequestList = Arrays.asList(serializer.deserialize(msg, PercentageHealthFacilitiesStaffRequest[].class));
         return percentageHealthFacilitiesStaffRequestList;
     }
 

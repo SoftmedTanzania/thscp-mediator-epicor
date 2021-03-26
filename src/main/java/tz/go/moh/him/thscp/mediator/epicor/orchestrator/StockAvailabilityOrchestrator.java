@@ -1,37 +1,21 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
 
-import akka.actor.ActorSelection;
-import akka.actor.UntypedActor;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpStatus;
 import org.codehaus.plexus.util.StringUtils;
-import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
-import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
-import tz.go.moh.him.thscp.mediator.epicor.domain.ProgramListRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.StockAvailabilityRequest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class StockAvailabilityOrchestrator extends BaseOrchestrator {
 
@@ -91,28 +75,27 @@ public class StockAvailabilityOrchestrator extends BaseOrchestrator {
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "uuid"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockAvailabilityRequest.getDistrict())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"district"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "district"), null));
 
         if (StringUtils.isBlank(String.valueOf(stockAvailabilityRequest.getExpected())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"expected"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "expected"), null));
 
         if (StringUtils.isBlank(stockAvailabilityRequest.getPeriod()))
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "period"), null));
 
         if (StringUtils.isBlank(stockAvailabilityRequest.getProgram()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"program"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "program"), null));
 
         try {
             if (!DateValidatorUtils.isValidPastDate(stockAvailabilityRequest.getPeriod(), checkDateFormatStrings(stockAvailabilityRequest.getPeriod()))) {
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"period"), null));
-            }
-            else{
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "period"), null));
+            } else {
                 SimpleDateFormat stockAvailabilityDateFormat = new SimpleDateFormat(checkDateFormatStrings(stockAvailabilityRequest.getPeriod()));
                 stockAvailabilityRequest.setPeriod(thscpDateFormat.format(stockAvailabilityDateFormat.parse(stockAvailabilityRequest.getPeriod())));
 
             }
         } catch (ParseException e) {
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"),"period"),null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"), "period"), null));
         }
 
         return resultDetailsList;
@@ -120,8 +103,7 @@ public class StockAvailabilityOrchestrator extends BaseOrchestrator {
 
     @Override
     public void onReceive(Object msg) {
-        if (msg instanceof MediatorHTTPRequest)
-        {
+        if (msg instanceof MediatorHTTPRequest) {
             workingRequest = (MediatorHTTPRequest) msg;
 
             log.info("Received request: " + workingRequest.getHost() + " " + workingRequest.getMethod() + " " + workingRequest.getPath());
@@ -155,7 +137,7 @@ public class StockAvailabilityOrchestrator extends BaseOrchestrator {
                 validatedObjects = validateData(stockAvailabilityRequestList);
             }
 
-            log.info("validated object is" +new Gson().toJson(validatedObjects));
+            log.info("validated object is" + new Gson().toJson(validatedObjects));
 
             sendDataToThscp(new Gson().toJson(validatedObjects));
         } else if (msg instanceof MediatorHTTPResponse) { //respond
@@ -168,7 +150,7 @@ public class StockAvailabilityOrchestrator extends BaseOrchestrator {
 
 
     protected List<StockAvailabilityRequest> convertMessageBodyToPojoList(String msg) throws JsonSyntaxException {
-        List<StockAvailabilityRequest> stockAvailabilityRequestList = Arrays.asList(serializer.deserialize(msg,StockAvailabilityRequest[].class));
+        List<StockAvailabilityRequest> stockAvailabilityRequestList = Arrays.asList(serializer.deserialize(msg, StockAvailabilityRequest[].class));
         return stockAvailabilityRequestList;
     }
 }

@@ -1,4 +1,5 @@
 package tz.go.moh.him.thscp.mediator.epicor.domain;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
@@ -39,93 +40,75 @@ public class HealthCommoditiesFundingRequest {
     @SerializedName("startDate")
     private String startDate;
 
-    public String getUuid()
-    {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid)
-    {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
-    public int getAllocatedFund()
-    {
+    public int getAllocatedFund() {
         return allocatedFund;
     }
 
-    public void setAllocatedFund(int allocatedFund)
-    {
+    public void setAllocatedFund(int allocatedFund) {
         this.allocatedFund = allocatedFund;
     }
 
-    public int getDisbursedFund()
-    {
+    public int getDisbursedFund() {
         return disbursedFund;
     }
 
-    public void setDisbursedFund(int disbursedFund)
-    {
+    public void setDisbursedFund(int disbursedFund) {
         this.disbursedFund = disbursedFund;
     }
 
-    public String getEndDate()
-    {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate)
-    {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public String getFacilityId()
-    {
+    public String getFacilityId() {
         return facilityId;
     }
 
-    public void setFacilityId(String facilityId)
-    {
+    public void setFacilityId(String facilityId) {
         this.facilityId = facilityId;
     }
 
-    public String getProductCode()
-    {
+    public String getProductCode() {
         return productCode;
     }
 
-    public void setProductCode(String productCode)
-    {
+    public void setProductCode(String productCode) {
         this.productCode = productCode;
     }
 
-    public String getProgram()
-    {
+    public String getProgram() {
         return program;
     }
 
-    public void setProgram(String program)
-    {
+    public void setProgram(String program) {
         this.program = program;
     }
 
-    public String getSource()
-    {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(String source)
-    {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public String getStartDate()
-    {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate)
-    {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 }

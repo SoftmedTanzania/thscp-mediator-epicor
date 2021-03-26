@@ -1,37 +1,21 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
 
-import akka.actor.ActorSelection;
-import akka.actor.UntypedActor;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpStatus;
 import org.codehaus.plexus.util.StringUtils;
-import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
-import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
-import tz.go.moh.him.thscp.mediator.epicor.domain.PercentageHealthFacilitiesStaffRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.ProcurementSupplyPlanRequest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ProcurementSupplyPlanOrchestrator extends BaseOrchestrator {
 
@@ -88,52 +72,51 @@ public class ProcurementSupplyPlanOrchestrator extends BaseOrchestrator {
         List<ResultDetail> resultDetailsList = new ArrayList<>();
 
         if (StringUtils.isBlank(procurementSupplyPlanRequest.getUuid()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"uuid"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "uuid"), null));
 
         if (StringUtils.isBlank(String.valueOf(procurementSupplyPlanRequest.getContractDate())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"contractDate"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "contractDate"), null));
 
         if (StringUtils.isBlank(String.valueOf(procurementSupplyPlanRequest.getCurrency())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"currency"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "currency"), null));
 
         if (StringUtils.isBlank(String.valueOf(procurementSupplyPlanRequest.getLotAmount())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"lotAmount"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "lotAmount"), null));
 
         if (StringUtils.isBlank(procurementSupplyPlanRequest.getMeasureUnit()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"measureUnit"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "measureUnit"), null));
 
         if (StringUtils.isBlank(String.valueOf(procurementSupplyPlanRequest.getOrderDate())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"orderDate"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "orderDate"), null));
 
         if (StringUtils.isBlank(procurementSupplyPlanRequest.getOrderId()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"orderId"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "orderId"), null));
 
         if (StringUtils.isBlank(String.valueOf(procurementSupplyPlanRequest.getOrderQuantity())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"orderQuantity"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "orderQuantity"), null));
 
         if (StringUtils.isBlank(procurementSupplyPlanRequest.getProductCode()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"productCode"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
 
         if (StringUtils.isBlank(String.valueOf(procurementSupplyPlanRequest.getReceivedAmount())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"receivedAmount"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "receivedAmount"), null));
 
         if (StringUtils.isBlank(procurementSupplyPlanRequest.getReceivedDate()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"receivedDate"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "receivedDate"), null));
 
         if (StringUtils.isBlank(String.valueOf(procurementSupplyPlanRequest.getStatus())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"status"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "status"), null));
 
         try {
             if (!DateValidatorUtils.isValidPastDate(procurementSupplyPlanRequest.getContractDate(), checkDateFormatStrings(procurementSupplyPlanRequest.getContractDate()))) {
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"contractDate"), null));
-            }
-            else{
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "contractDate"), null));
+            } else {
                 SimpleDateFormat procurementSupplyPlanDateFormat = new SimpleDateFormat(checkDateFormatStrings(procurementSupplyPlanRequest.getContractDate()));
                 procurementSupplyPlanRequest.setContractDate(thscpDateFormat.format(procurementSupplyPlanDateFormat.parse(procurementSupplyPlanRequest.getContractDate())));
 
             }
         } catch (ParseException e) {
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"),"contractDate"),null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"), "contractDate"), null));
         }
 
         return resultDetailsList;
@@ -141,8 +124,7 @@ public class ProcurementSupplyPlanOrchestrator extends BaseOrchestrator {
 
     @Override
     public void onReceive(Object msg) {
-        if (msg instanceof MediatorHTTPRequest)
-        {
+        if (msg instanceof MediatorHTTPRequest) {
             workingRequest = (MediatorHTTPRequest) msg;
 
             log.info("Received request: " + workingRequest.getHost() + " " + workingRequest.getMethod() + " " + workingRequest.getPath());
@@ -176,7 +158,7 @@ public class ProcurementSupplyPlanOrchestrator extends BaseOrchestrator {
                 validatedObjects = validateData(procurementSupplyPlanRequestList);
             }
 
-            log.info("validated object is" +new Gson().toJson(validatedObjects));
+            log.info("validated object is" + new Gson().toJson(validatedObjects));
 
             sendDataToThscp(new Gson().toJson(validatedObjects));
         } else if (msg instanceof MediatorHTTPResponse) { //respond
@@ -189,7 +171,7 @@ public class ProcurementSupplyPlanOrchestrator extends BaseOrchestrator {
 
 
     protected List<ProcurementSupplyPlanRequest> convertMessageBodyToPojoList(String msg) throws JsonSyntaxException {
-        List<ProcurementSupplyPlanRequest> procurementSupplyPlanRequestList = Arrays.asList(serializer.deserialize(msg,ProcurementSupplyPlanRequest[].class));
+        List<ProcurementSupplyPlanRequest> procurementSupplyPlanRequestList = Arrays.asList(serializer.deserialize(msg, ProcurementSupplyPlanRequest[].class));
         return procurementSupplyPlanRequestList;
     }
 }

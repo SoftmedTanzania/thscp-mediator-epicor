@@ -1,36 +1,21 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
 
-import akka.actor.ActorSelection;
-import akka.actor.UntypedActor;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpStatus;
 import org.codehaus.plexus.util.StringUtils;
-import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
-import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
 import tz.go.moh.him.thscp.mediator.epicor.domain.ItemFillRateRequest;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ItemFillRateOrchestrator extends BaseOrchestrator {
 
@@ -90,68 +75,66 @@ public class ItemFillRateOrchestrator extends BaseOrchestrator {
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "uuid"), null));
 
         if (StringUtils.isBlank(String.valueOf(itemFillRateRequest.getDeliveredQuantity())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"deliveredQuantity"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "deliveredQuantity"), null));
 
         if (StringUtils.isBlank(itemFillRateRequest.getDeliveryDate()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"deliveryDate"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "deliveryDate"), null));
 
         if (StringUtils.isBlank(itemFillRateRequest.getDeliveryFromFacilityId()))
             resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "deliveryFromFacilityId"), null));
 
         if (StringUtils.isBlank(itemFillRateRequest.getOrderDate()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"orderDate"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "orderDate"), null));
 
         if (StringUtils.isBlank(String.valueOf(itemFillRateRequest.getOrderFromFacilityId())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"orderFromFacilityId"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "orderFromFacilityId"), null));
 
         if (StringUtils.isBlank(String.valueOf(itemFillRateRequest.getDeliveryPromiseDate())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"deliveryPromiseDate"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "deliveryPromiseDate"), null));
 
         if (StringUtils.isBlank(itemFillRateRequest.getOrderId()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"orderId"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "orderId"), null));
 
         if (StringUtils.isBlank(itemFillRateRequest.getOrderStatus()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"orderStatus"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "orderStatus"), null));
 
         if (StringUtils.isBlank(String.valueOf(itemFillRateRequest.getOrderType())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"orderType"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "orderType"), null));
 
         if (StringUtils.isBlank(String.valueOf(itemFillRateRequest.getOrderedQuantity())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"orderedQuantity"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "orderedQuantity"), null));
 
         if (StringUtils.isBlank(itemFillRateRequest.getProductCode()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"productCode"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
 
         if (StringUtils.isBlank(itemFillRateRequest.getProgramCode()))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"programCode"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "programCode"), null));
 
         if (StringUtils.isBlank(String.valueOf(itemFillRateRequest.getTargetDays())))
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"),"targetDays"), null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "targetDays"), null));
 
         try {
             if (!DateValidatorUtils.isValidPastDate(itemFillRateRequest.getDeliveryDate(), checkDateFormatStrings(itemFillRateRequest.getDeliveryDate()))) {
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"deliveryDate"), null));
-            }
-            else{
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "deliveryDate"), null));
+            } else {
                 SimpleDateFormat itemFillRateDateFormat = new SimpleDateFormat(checkDateFormatStrings(itemFillRateRequest.getDeliveryDate()));
                 itemFillRateRequest.setDeliveryDate(thscpDateFormat.format(itemFillRateDateFormat.parse(itemFillRateRequest.getDeliveryDate())));
 
             }
         } catch (ParseException e) {
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"),"deliveryDate"),null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"), "deliveryDate"), null));
         }
 
         try {
             if (!DateValidatorUtils.isValidPastDate(itemFillRateRequest.getOrderDate(), checkDateFormatStrings(itemFillRateRequest.getOrderDate()))) {
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"orderDate"), null));
-            }
-            else{
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "orderDate"), null));
+            } else {
                 SimpleDateFormat itemFillRateDateFormat = new SimpleDateFormat(checkDateFormatStrings(itemFillRateRequest.getOrderDate()));
                 itemFillRateRequest.setOrderDate(thscpDateFormat.format(itemFillRateDateFormat.parse(itemFillRateRequest.getOrderDate())));
 
             }
         } catch (ParseException e) {
-            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"),"orderDate"),null));
+            resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"), "orderDate"), null));
         }
 
         return resultDetailsList;
@@ -159,8 +142,7 @@ public class ItemFillRateOrchestrator extends BaseOrchestrator {
 
     @Override
     public void onReceive(Object msg) {
-        if (msg instanceof MediatorHTTPRequest)
-        {
+        if (msg instanceof MediatorHTTPRequest) {
             workingRequest = (MediatorHTTPRequest) msg;
 
             log.info("Received request: " + workingRequest.getHost() + " " + workingRequest.getMethod() + " " + workingRequest.getPath());
@@ -194,7 +176,7 @@ public class ItemFillRateOrchestrator extends BaseOrchestrator {
                 validatedObjects = validateData(itemFillRateRequestList);
             }
 
-            log.info("validated object is" +new Gson().toJson(validatedObjects));
+            log.info("validated object is" + new Gson().toJson(validatedObjects));
 
             sendDataToThscp(new Gson().toJson(validatedObjects));
         } else if (msg instanceof MediatorHTTPResponse) { //respond
@@ -206,7 +188,7 @@ public class ItemFillRateOrchestrator extends BaseOrchestrator {
     }
 
     protected List<ItemFillRateRequest> convertMessageBodyToPojoList(String msg) throws JsonSyntaxException {
-        List<ItemFillRateRequest> itemFillRateRequestList = Arrays.asList(serializer.deserialize(msg,ItemFillRateRequest[].class));
+        List<ItemFillRateRequest> itemFillRateRequestList = Arrays.asList(serializer.deserialize(msg, ItemFillRateRequest[].class));
         return itemFillRateRequestList;
     }
 

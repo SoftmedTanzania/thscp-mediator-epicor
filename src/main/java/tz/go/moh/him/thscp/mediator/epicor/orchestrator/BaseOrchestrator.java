@@ -5,8 +5,6 @@ import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -18,11 +16,9 @@ import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
-import tz.go.moh.him.thscp.mediator.epicor.domain.DosProductRequest;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,15 +27,13 @@ import java.util.*;
 public abstract class BaseOrchestrator extends UntypedActor {
 
     /**
-     * The logger instance.
-     */
-    public final LoggingAdapter log = Logging.getLogger(getContext().system(), this);
-
-    /**
      * The serializer
      */
     protected static final JsonSerializer serializer = new JsonSerializer();
-
+    /**
+     * The logger instance.
+     */
+    public final LoggingAdapter log = Logging.getLogger(getContext().system(), this);
     /**
      * The mediator configuration.
      */
@@ -82,13 +76,12 @@ public abstract class BaseOrchestrator extends UntypedActor {
     }
 
     public static String checkDateFormatStrings(String dateString) {
-        List<String> formatStrings = Arrays.asList("yyyy-MM-dd HH:mm:ss:ms", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd","yyyyMMdd");
+        List<String> formatStrings = Arrays.asList("yyyy-MM-dd HH:mm:ss:ms", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", "yyyyMMdd");
         for (String formatString : formatStrings) {
             try {
                 new SimpleDateFormat(formatString).parse(dateString);
                 return formatString;
-            }
-            catch (ParseException e) {
+            } catch (ParseException e) {
                 //  e.printStackTrace();
             }
         }
