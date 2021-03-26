@@ -66,11 +66,14 @@ public class MockDestination extends MockHTTPConnector {
 
         List<HealthCommoditiesFundingRequest> expected;
 
+        expected = null;
+
         try {
             expected = Arrays.asList(serializer.deserialize(IOUtils.toByteArray(stream), HealthCommoditiesFundingRequest[].class));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
 
         List<HealthCommoditiesFundingRequest> actual = Arrays.asList(serializer.deserialize(msg.getBody(), HealthCommoditiesFundingRequest[].class));
 
