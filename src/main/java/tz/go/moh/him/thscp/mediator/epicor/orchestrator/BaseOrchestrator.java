@@ -29,7 +29,7 @@ public abstract class BaseOrchestrator extends UntypedActor {
     /**
      * The serializer
      */
-    protected static final JsonSerializer serializer = new JsonSerializer();
+    public static final JsonSerializer serializer = new JsonSerializer();
     /**
      * The logger instance.
      */
