@@ -17,7 +17,7 @@ import java.util.List;
 public class ProgramListOrchestrator extends BaseOrchestrator {
 
     /**
-     * Initializes a new instance of the {@link DosProductOrchestrator} class.
+     * Initializes a new instance of the {@link ProgramListOrchestrator} class.
      *
      * @param config The mediator configuration.
      */

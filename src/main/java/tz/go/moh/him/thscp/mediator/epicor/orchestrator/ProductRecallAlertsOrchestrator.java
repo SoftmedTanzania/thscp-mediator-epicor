@@ -20,7 +20,7 @@ import java.util.List;
 public class ProductRecallAlertsOrchestrator extends BaseOrchestrator {
 
     /**
-     * Initializes a new instance of the {@link DosProductOrchestrator} class.
+     * Initializes a new instance of the {@link ProductRecallAlertsOrchestrator} class.
      *
      * @param config The mediator configuration.
      */

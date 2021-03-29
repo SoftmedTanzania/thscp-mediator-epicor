@@ -58,7 +58,7 @@ public abstract class BaseOrchestrator extends UntypedActor {
      */
 
     /**
-     * Initializes a new instance of the {@link DosProductOrchestrator} class.
+     * Initializes a new instance of the {@link BaseOrchestrator} class.
      *
      * @param config The mediator configuration.
      */

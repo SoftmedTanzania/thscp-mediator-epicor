@@ -20,7 +20,7 @@ import java.util.List;
 public class ProcurementSupplyPlanOrchestrator extends BaseOrchestrator {
 
     /**
-     * Initializes a new instance of the {@link DosProductOrchestrator} class.
+     * Initializes a new instance of the {@link ProcurementSupplyPlanOrchestrator} class.
      *
      * @param config The mediator configuration.
      */

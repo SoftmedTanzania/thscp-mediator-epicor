@@ -21,7 +21,7 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
 
 
     /**
-     * Initializes a new instance of the {@link DosProductOrchestrator} class.
+     * Initializes a new instance of the {@link StockOnHandPercentageWastageOrchestrator} class.
      *
      * @param config The mediator configuration.
      */

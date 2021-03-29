@@ -29,16 +29,16 @@ public class MediatorMain {
 
         //TODO Configure routes here
         //...
-        routingTable.addRoute("/health-commodities-funding", HealthCommoditiesFundingOrchestrator.class);
-        routingTable.addRoute("/procurement-supply-plan", ProcurementSupplyPlanOrchestrator.class);
-        routingTable.addRoute("/product-recall-alerts", ProductRecallAlertsOrchestrator.class);
-        routingTable.addRoute("/emergency-supply-chain-commodities-stock-status", EmergencySupplyChainCommoditiesStockStatusOrchestrator.class);
-        routingTable.addRoute("/item-fill-rate", ItemFillRateOrchestrator.class);
-        routingTable.addRoute("/percentage-health-facilities-staff", PercentageHealthFacilitiesStaffOrchestrator.class);
-        routingTable.addRoute("/dos-product", DosProductOrchestrator.class);
-        routingTable.addRoute("/stock-on-hand-percentage-wastage", StockOnHandPercentageWastageOrchestrator.class);
-        routingTable.addRoute("/stock-availability", StockAvailabilityOrchestrator.class);
-        routingTable.addRoute("/program-list", ProgramListOrchestrator.class);
+        routingTable.addRoute("/thscp-health-commodities-funding", HealthCommoditiesFundingOrchestrator.class);
+        routingTable.addRoute("/thscp-procurement-supply-plan", ProcurementSupplyPlanOrchestrator.class);
+        routingTable.addRoute("/thscp-product-recall-alerts", ProductRecallAlertsOrchestrator.class);
+        routingTable.addRoute("/thscp-emergency-supply-chain-commodities-stock-status", EmergencySupplyChainCommoditiesStockStatusOrchestrator.class);
+        routingTable.addRoute("/thscp-item-fill-rate", ItemFillRateOrchestrator.class);
+        routingTable.addRoute("/thscp-percentage-health-facilities-staff", PercentageHealthFacilitiesStaffOrchestrator.class);
+        routingTable.addRoute("/thscp-dos-product", DosProductOrchestrator.class);
+        routingTable.addRoute("/thscp-stock-on-hand-percentage-wastage", StockOnHandPercentageWastageOrchestrator.class);
+        routingTable.addRoute("/thscp-stock-availability", StockAvailabilityOrchestrator.class);
+        routingTable.addRoute("/thscp-program-list", ProgramListOrchestrator.class);
 
         return routingTable;
     }
