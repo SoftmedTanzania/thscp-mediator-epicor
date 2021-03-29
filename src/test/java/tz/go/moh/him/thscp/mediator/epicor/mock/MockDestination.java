@@ -3,7 +3,12 @@ import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import org.junit.Assert;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.testing.MockHTTPConnector;
-import tz.go.moh.him.thscp.mediator.epicor.domain.*;
+import tz.go.moh.him.thscp.mediator.epicor.domain.HealthCommoditiesFundingRequest;
+import tz.go.moh.him.thscp.mediator.epicor.domain.DosProductRequest;
+import tz.go.moh.him.thscp.mediator.epicor.domain.ProductRecallAlertsRequest;
+import tz.go.moh.him.thscp.mediator.epicor.domain.ProgramListRequest;
+import tz.go.moh.him.thscp.mediator.epicor.domain.StockAvailabilityRequest;
+import tz.go.moh.him.thscp.mediator.epicor.domain.StockOnHandPercentageWastageRequest;
 
 import java.util.Collections;
 import java.util.Map;
@@ -15,6 +20,16 @@ import java.util.Arrays;
  * Represents a mock destination.
  */
 public class MockDestination extends MockHTTPConnector {
+    /**
+     * serializer initialization
+     */
+    public JsonSerializer serializer = new JsonSerializer();
+
+    /**
+     * The expected message type
+     */
+    private final String expectedMessageType;
+
 
     /**
      * Gets the response.
@@ -46,16 +61,10 @@ public class MockDestination extends MockHTTPConnector {
         return Collections.emptyMap();
     }
 
-    /**
-     * The expected message type
-     */
-    private final String expectedMessageType;
 
     public MockDestination(String expectedMessageType) {
         this.expectedMessageType = expectedMessageType;
     }
-
-    JsonSerializer serializer = new JsonSerializer();
     /**
      * Handles the message.
      *
