@@ -16,7 +16,6 @@ import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -109,15 +108,15 @@ public abstract class BaseOrchestrator extends UntypedActor {
             int portNumber;
 
             if (config.getDynamicConfig().isEmpty()) {
-                if (config.getProperty("thscp.secure").equals("true")) {
+                if (config.getProperty("destination.secure").equals("true")) {
                     scheme = "https";
                 } else {
                     scheme = "http";
                 }
 
-                host = config.getProperty("thscp.host");
-                portNumber = Integer.parseInt(config.getProperty("thscp.api.port"));
-                path = config.getProperty("thscp.api.path");
+                host = config.getProperty("destination.host");
+                portNumber = Integer.parseInt(config.getProperty("destination.api.port"));
+                path = config.getProperty("destination.api.path");
             } else {
                 JSONObject connectionProperties = new JSONObject(config.getDynamicConfig()).getJSONObject("thscpConnectionProperties");
 
@@ -146,6 +145,5 @@ public abstract class BaseOrchestrator extends UntypedActor {
             httpConnector.tell(forwardToThscpRequest, getSelf());
         }
     }
-
 
 }
