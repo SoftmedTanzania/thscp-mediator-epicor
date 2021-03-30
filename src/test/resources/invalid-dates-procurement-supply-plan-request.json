@@ -1,0 +1,17 @@
+[
+  {
+    "uuid": "446c62d7-db22-4e42-9f17-9b8dee061341",
+    "contractDate": "2025-11-25",
+    "currency": "TZS",
+    "lotAmount": 400000,
+    "measureUnit": "B/12",
+    "orderDate": "2025-11-25",
+    "orderId": "OD-000001",
+    "orderQuantity": 5000,
+    "productCode": "10020035MD",
+    "receivedAmount": 4000,
+    "receivedDate": "202-12-20",
+    "status": 1,
+    "supplierId": "SP-123"
+  }
+]

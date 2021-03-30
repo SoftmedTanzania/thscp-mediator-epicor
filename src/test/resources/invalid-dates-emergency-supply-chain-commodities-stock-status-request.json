@@ -1,0 +1,14 @@
+
+[
+  {
+    "uuid": "9bd21ec8-6388-464f-96d7-265fef0fa46a",
+    "availableQuantity": 500,
+    "facility_id": "12345",
+    "period": "2023-11-13",
+    "productCode": "PR-1",
+    "programCode": "PG-1",
+    "stockOfMonth": 40,
+    "stockQuantity": 50
+  }
+]
+

@@ -1,3 +1,9 @@
+
 {
-  "ERR01": ""
+  "GENERIC_ERR": "%s cannot be null or empty",
+  "ERROR_INVALID_PAYLOAD": "Error the payload is invalid",
+  "ERROR_INVALID_DATE_FORMAT": "%s is in an invalid format",
+  "ERROR_DATE_IS_NOT_VALID_PAST_DATE": "%s is not a valid past date"
 }
+
+

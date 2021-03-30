@@ -1,37 +1,274 @@
 {
   "urn": "urn:uuid:e9c52bd0-7b2d-11eb-9972-515a77f92f82",
   "version": "0.1.0",
-  "name": "THSCP-Mediator-Epicor",
+  "name": "Epicor-THSCP",
   "description": "A mediator for handling system integration between Epicor and THSCP",
   "endpoints": [
     {
-      "name": "THSCP-Mediator-Epicor Route",
+      "name": "Health Commodities Funding Route",
       "host": "localhost",
-      "port": "3018",
-      "path": "/thscp",
-      "type": "http"
+      "port": "3021",
+      "path": "/thscp-health-commodities-funding",
+      "type": "http",
+      "primary": "true"
+    },
+    {
+      "name": "Dos Product Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-dos-product",
+      "type": "http",
+      "primary": "true"
+    },
+    {
+      "name": "Epicor - THSCP  Emergency Supply Chain Commodities Stock Status Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-emergency-supply-chain-commodities-stock-status",
+      "type": "http",
+      "primary": "true"
+    },
+    {
+      "name": "Procurement Supply Plan Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-procurement-supply-plan",
+      "type": "http",
+      "primary": "true"
+    },
+    {
+      "name": "Product Recall Alerts Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-product-recall-alerts",
+      "type": "http",
+      "primary": "true"
+    },
+    {
+      "name": "Item Fill Rate Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-item-fill-rate",
+      "type": "http",
+      "primary": "true"
+    },
+    {
+      "name": "Percentage Health Facilities Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-percentage-health-facilities-staff",
+      "type": "http",
+      "primary": "true"
+    },
+    {
+      "name": "Stock On Hand And Percentage Wastage Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-stock-on-hand-percentage-wastage",
+      "type": "http",
+      "primary": "true"
+    },
+    {
+      "name": "Stock Availability Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-stock-availability",
+      "type": "http",
+      "primary": "true"
+    },
+    {
+      "name": "Program List Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-program-list",
+      "type": "http",
+      "primary": "true"
     }
   ],
+
   "defaultChannelConfig": [
     {
-      "name": "Epicor - THSCP Channel",
-      "urlPattern": "^/thscp$",
+      "name": "Epicor - THSCP Health Commodities Funding Channel",
+      "urlPattern": "^/thscp-health-commodities-funding$",
       "type": "http",
       "allow": [
-        "thscp-mediator-epicor-role"
+        "epicor-role"
       ],
       "routes": [
         {
-          "name": "THSCP-Mediator-Epicor Route",
+          "name": "Health Commodities Funding Route",
           "host": "localhost",
-          "port": "3018",
-          "path": "/thscp",
+          "port": "3021",
+          "path": "/thscp-health-commodities-funding",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Dos Product Channel",
+      "urlPattern": "^/thscp-dos-product$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Dos Product Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-dos-product",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Emergency Supply Chain Commodities Stock Status Channel",
+      "urlPattern": "^/thscp-emergency-supply-chain-commodities-stock-status$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Epicor - THSCP  Emergency Supply Chain Commodities Stock Status Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-emergency-supply-chain-commodities-stock-status",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Procurement Supply Plan Channel",
+      "urlPattern": "^/thscp-procurement-supply-plan$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Procurement Supply Plan Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-procurement-supply-plan",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Product Recall Alerts Channel",
+      "urlPattern": "^/thscp-product-recall-alerts$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Product Recall Alerts Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-product-recall-alerts",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Item Fill Rate Channel",
+      "urlPattern": "^/thscp-item-fill-rate$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Item Fill Rate Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-item-fill-rate",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Percentage Health facilities Channel",
+      "urlPattern": "^/thscp-percentage-health-facilities-staff$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Percentage Health Facilities Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-percentage-health-facilities-staff",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Stock On Hand And Percentage Wastage Channel",
+      "urlPattern": "^/thscp-stock-on-hand-percentage-wastage$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Stock On Hand And Percentage Wastage Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-stock-on-hand-percentage-wastage",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Stock Availability Channel",
+      "urlPattern": "^/thscp-stock-availability$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Stock Availability Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-stock-availability",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Program List Channel",
+      "urlPattern": "^/thscp-program-list$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Program List Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-program-list",
           "type": "http",
           "primary": "true"
         }
       ]
     }
   ],
+
   "configDefs": [
     {
       "param": "destinationConnectionProperties",
@@ -83,3 +320,4 @@
     }
   ]
 }
+
