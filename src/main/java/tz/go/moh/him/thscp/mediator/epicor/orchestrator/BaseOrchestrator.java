@@ -108,11 +108,12 @@ public abstract class BaseOrchestrator extends UntypedActor {
             int portNumber;
 
             if (config.getDynamicConfig().isEmpty()) {
-                if (config.getProperty("destination.secure").equals("true")) {
+                if (config.getProperty("destination.scheme").equals("https")) {
                     scheme = "https";
                 } else {
                     scheme = "http";
                 }
+
 
                 host = config.getProperty("destination.host");
                 portNumber = Integer.parseInt(config.getProperty("destination.api.port"));

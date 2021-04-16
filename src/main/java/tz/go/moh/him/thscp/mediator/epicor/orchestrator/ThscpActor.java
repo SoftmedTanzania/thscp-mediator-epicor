@@ -11,6 +11,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import org.openhim.mediator.engine.messages.SimpleMediatorRequest;
+import tz.go.moh.him.thscp.mediator.epicor.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,13 +66,85 @@ public class ThscpActor extends UntypedActor {
 
             host = config.getProperty("destination.host");
             portNumber = Integer.parseInt(config.getProperty("destination.api.port"));
-            path = config.getProperty("destination.api.path");
+          //  path = config.getProperty("destination.api.path");
+            switch (message) {
+                case Constants.DOS_PRODUCT_REQUEST:
+                    path = config.getProperty("destination.api.path.dos_product");
+                    break;
+                case Constants.EMERGENCY_SUPPLY_CHAIN_COMMODITIES_STOCK_STATUS_REQUEST:
+                    path = config.getProperty("destination.api.path.emergency_supply_chain_commodities_stock_status");
+                    break;
+                case Constants.HEALTH_COMMODITIES_FUNDING_REQUEST:
+                    path = config.getProperty("destination.api.path.health_commodities_funding");
+                    break;
+                case Constants.ITEM_FILL_RATE_REQUEST:
+                    path = config.getProperty("destination.api.path.item_fill_rate");
+                    break;
+                case Constants.PERCENTAGE_HEALTH_FACILITIES_STAFF_REQUEST:
+                    path = config.getProperty("destination.api.path.percentage_health_facilities_staff");
+                    break;
+                case Constants.PROCUREMENT_SUPPLY_PLAN_REQUEST:
+                    path = config.getProperty("destination.api.path.procurement_supply_plan");
+                    break;
+                case Constants.PRODUCT_RECALL_ALERTS_REQUEST:
+                    path = config.getProperty("destination.api.path.product_recall_alerts");
+                    break;
+                case Constants.PROGRAM_LIST_REQUEST:
+                    path = config.getProperty("destination.api.path.program_list");
+                    break;
+                case Constants.STOCK_AVAILABILITY_REQUEST:
+                    path = config.getProperty("destination.api.path.stock_availability");
+                    break;
+                case Constants.STOCK_ON_HAND_PERCENTAGE_WASTAGE_REQUEST:
+                    path = config.getProperty("destination.api.path.stock_on_hand_percentage_wastage");
+                    break;
+                default:
+                    path = null;
+                    break;
+            }
+
         } else {
             JSONObject connectionProperties = new JSONObject(config.getDynamicConfig()).getJSONObject("destinationConnectionProperties");
 
             host = connectionProperties.getString("destinationHost");
             portNumber = connectionProperties.getInt("destinationPort");
-            path = connectionProperties.getString("destinationPath");
+            //path = connectionProperties.getString("destinationPath");
+            switch (message) {
+                case Constants.DOS_PRODUCT_REQUEST:
+                    path = config.getProperty("destinationPathDosProduct");
+                    break;
+                case Constants.EMERGENCY_SUPPLY_CHAIN_COMMODITIES_STOCK_STATUS_REQUEST:
+                    path = config.getProperty("destinationPathEmergencySupplyChainCommoditiesStockStatus");
+                    break;
+                case Constants.HEALTH_COMMODITIES_FUNDING_REQUEST:
+                    path = config.getProperty("destinationPathHealthCommoditiesFunding");
+                    break;
+                case Constants.ITEM_FILL_RATE_REQUEST:
+                    path = config.getProperty("destinationPathItemFillRate");
+                    break;
+                case Constants.PERCENTAGE_HEALTH_FACILITIES_STAFF_REQUEST:
+                    path = config.getProperty("destinationPathPercentageHealthFacilitiesStaff");
+                    break;
+                case Constants.PROCUREMENT_SUPPLY_PLAN_REQUEST:
+                    path = config.getProperty("destinationPathProcurementSupplyPlan");
+                    break;
+                case Constants.PRODUCT_RECALL_ALERTS_REQUEST:
+                    path = config.getProperty("destinationPathProductRecallAlerts");
+                    break;
+                case Constants.PROGRAM_LIST_REQUEST:
+                    path = config.getProperty("destinationPathProgramList");
+                    break;
+                case Constants.STOCK_AVAILABILITY_REQUEST:
+                    path = config.getProperty("destinationPathStockAvailability");
+                    break;
+                case Constants.STOCK_ON_HAND_PERCENTAGE_WASTAGE_REQUEST:
+                    path = config.getProperty("destinationPathStockOnHandPercentageWastage");
+                    break;
+                default:
+                    path = null;
+                    break;
+            }
+
             scheme = connectionProperties.getString("destinationScheme");
         }
 

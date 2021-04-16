@@ -289,9 +289,63 @@
           "type": "number"
         },
         {
-          "param": "destinationPath",
-          "displayName": "Destination Path",
-          "description": "The destination path for receiving data from the HIM. eg /hdr",
+          "param": "destinationPathDosProduct",
+          "displayName": "The destination path for receiving Dormant/Obsolete/Slow Moving Products",
+          "description": "The destination path for receiving Dormant/Obsolete/Slow Moving Products",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathEmergencySupplyChainCommoditiesStockStatus",
+          "displayName": "The destination path for receiving Emergency Supply Chain Commodities Stock Status",
+          "description": "The destination path for receiving Emergency Supply Chain Commodities Stock Status",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathHealthCommoditiesFunding",
+          "displayName": "The destination path for receiving Health Commodities Funding",
+          "description": "The destination path for receiving Health Commodities Funding",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathItemFillRate",
+          "displayName": "Destination Path for Item Fill Rate",
+          "description": "The destination path for receiving Item Fill Rate",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathPercentageHealthFacilitiesStaff",
+          "displayName": "Destination Path for Percentage of health facilities with at least one staff (Pharmaceutical and Laboratory personnel)\n",
+          "description": "The destination path for receiving Percentage of health facilities with at least one staff (Pharmaceutical and Laboratory personnel)\n",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathProcurementSupplyPlan",
+          "displayName": "Destination Path for Procurement Supply Plan",
+          "description": "The destination path for receiving Procurement Supply Plan",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathProductRecallAlerts",
+          "displayName": "Destination Path for Product Recall Alerts",
+          "description": "The destination path for receiving Product Recall Alerts",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathProgramList",
+          "displayName": "Destination Path for Program List",
+          "description": "The destination path for receiving Program List",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathStockAvailability",
+          "displayName": "Destination Path for Stock Availability",
+          "description": "The destination path for receiving Stock Availability",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathStockOnHandPercentageWastage",
+          "displayName": "Destination Path for Stock On Hand Percentage Wastage",
+          "description": "The destination path for receiving Stock On Hand Percentage Wastage",
           "type": "string"
         },
         {
