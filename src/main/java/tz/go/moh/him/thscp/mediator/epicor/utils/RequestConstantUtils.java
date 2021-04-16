@@ -1,6 +1,6 @@
 package tz.go.moh.him.thscp.mediator.epicor.utils;
 
-public class Constants {
+public class RequestConstantUtils {
     public static final String DOS_PRODUCT_REQUEST = "DosProductRequest";
     public static final String EMERGENCY_SUPPLY_CHAIN_COMMODITIES_STOCK_STATUS_REQUEST = "EmergencySupplyChainCommoditiesStockStatusRequest";
     public static final String HEALTH_COMMODITIES_FUNDING_REQUEST = "HealthCommoditiesFundingRequest";
