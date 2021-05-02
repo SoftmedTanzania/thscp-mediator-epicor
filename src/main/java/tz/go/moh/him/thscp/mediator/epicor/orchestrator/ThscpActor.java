@@ -40,7 +40,7 @@ public class ThscpActor extends UntypedActor {
     /**
      * The message type.
      */
-    private final String messageType;
+    final String messageType;
 
     /**
      * Initializes a new instance of the {@link ThscpActor} class.
