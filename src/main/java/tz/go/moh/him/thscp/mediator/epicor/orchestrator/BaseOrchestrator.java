@@ -1,6 +1,8 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
 
+import akka.actor.ActorRef;
 import akka.actor.ActorSelection;
+import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
@@ -14,7 +16,9 @@ import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.FinishRequest;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
+import org.openhim.mediator.engine.messages.SimpleMediatorRequest;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
+import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
 import java.io.IOException;
 import java.io.InputStream;
@@ -88,62 +92,52 @@ public abstract class BaseOrchestrator extends UntypedActor {
         return "";
     }
 
+    /**
+     * Handles the received message.
+     *
+     * @param message The received message.
+     */
+    @Override
+    public void onReceive(Object message) throws Exception {
+        if (message instanceof MediatorHTTPRequest) {
+            workingRequest = (MediatorHTTPRequest) message;
+            this.onReceiveRequestInternal((MediatorHTTPRequest) message);
+        } else {
+            unhandled(message);
+        }
+    }
 
     /**
-     * Handle sending of data to thscp
+     * Handles the received message.
      *
-     * @param msg to be sent
+     * @param request The request.
+     * @throws Exception if an exception occurs.
      */
-    public void sendDataToThscp(String msg) {
-        if (!errorMessages.isEmpty()) {
-            FinishRequest finishRequest = new FinishRequest(new Gson().toJson(errorMessages), "text/json", HttpStatus.SC_BAD_REQUEST);
-            (workingRequest).getRequestHandler().tell(finishRequest, getSelf());
+    protected abstract void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception;
+
+
+    /**
+     * Method that handles sending of data to the THSCP Actor
+     *
+     * @param objectsList   list of objects to be sent to THSCP
+     * @param resultDetails Result details of the data validation
+     */
+    protected void sendDataToThscp(List<?> objectsList, List<ResultDetail> resultDetails, String payloadType) {
+        // if there are any errors
+        // we need to serialize the results and return
+        if (resultDetails.stream().anyMatch(c -> c.getType() == ResultDetail.ResultsDetailsType.ERROR)) {
+            FinishRequest finishRequest = new FinishRequest(serializer.serializeToString(resultDetails), "application/json", HttpStatus.SC_BAD_REQUEST);
+            workingRequest.getRequestHandler().tell(finishRequest, getSelf());
+
         } else {
-            Map<String, String> headers = new HashMap<>();
-            headers.put("Content-Type", "application/json");
+            log.info("Sending data to Thscp Actor");
 
-            String scheme;
-            String host;
-            String path;
-            int portNumber;
-
-            if (config.getDynamicConfig().isEmpty()) {
-                if (config.getProperty("destination.scheme").equals("https")) {
-                    scheme = "https";
-                } else {
-                    scheme = "http";
-                }
-
-
-                host = config.getProperty("destination.host");
-                portNumber = Integer.parseInt(config.getProperty("destination.api.port"));
-                path = config.getProperty("destination.api.path");
-            } else {
-                JSONObject connectionProperties = new JSONObject(config.getDynamicConfig()).getJSONObject("destinationConnectionProperties");
-
-                if (!connectionProperties.getString("destinationUsername").isEmpty() && !connectionProperties.getString("destinationPassword").isEmpty()) {
-                    String auth = connectionProperties.getString("destinationUsername") + ":" + connectionProperties.getString("destinationPassword");
-                    byte[] encodedAuth = Base64.encodeBase64(
-                            auth.getBytes(StandardCharsets.ISO_8859_1));
-                    String authHeader = "Basic " + new String(encodedAuth);
-                    headers.put(HttpHeaders.AUTHORIZATION, authHeader);
-                }
-
-                host = connectionProperties.getString("destinationHost");
-                portNumber = connectionProperties.getInt("destinationPort");
-                path = connectionProperties.getString("destinationPath");
-                scheme = connectionProperties.getString("destinationScheme");
-            }
-
-            List<Pair<String, String>> params = new ArrayList<>();
-
-            MediatorHTTPRequest forwardToThscpRequest = new MediatorHTTPRequest(
-                    (workingRequest).getRequestHandler(), getSelf(), "Sending recall data to thscp", "POST", scheme,
-                    host, portNumber, path, msg, headers, params
-            );
-
-            ActorSelection httpConnector = getContext().actorSelection(config.userPathFor("http-connector"));
-            httpConnector.tell(forwardToThscpRequest, getSelf());
+            ActorRef actor = getContext().actorOf(Props.create(ThscpActor.class, config, payloadType));
+            actor.tell(
+                    new SimpleMediatorRequest<>(
+                            workingRequest.getRequestHandler(),
+                            getSelf(),
+                            new Gson().toJson(objectsList)), getSelf());
         }
     }
 
