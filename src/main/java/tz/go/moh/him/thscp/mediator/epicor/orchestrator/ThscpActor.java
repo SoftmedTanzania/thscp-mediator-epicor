@@ -5,7 +5,9 @@ import akka.actor.ActorSelection;
 import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.http.HttpHeaders;
 import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
@@ -13,6 +15,7 @@ import org.openhim.mediator.engine.messages.MediatorHTTPResponse;
 import org.openhim.mediator.engine.messages.SimpleMediatorRequest;
 import tz.go.moh.him.thscp.mediator.epicor.utils.RequestConstantUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,15 +37,21 @@ public class ThscpActor extends UntypedActor {
      */
     private ActorRef requestHandler;
 
+    /**
+     * The message type.
+     */
+    private final String messageType;
 
     /**
      * Initializes a new instance of the {@link ThscpActor} class.
      *
      * @param config The mediator configuration.
      */
-    public ThscpActor(MediatorConfig config) {
+    public ThscpActor(MediatorConfig config, String messageType) {
         this.config = config;
+        this.messageType = messageType;
     }
+
 
     /**
      * Forwards the message to the Tanzania Supply Chain Portal
@@ -56,7 +65,10 @@ public class ThscpActor extends UntypedActor {
         String scheme;
         String host;
         String path;
+        String username;
+        String password;
         int portNumber;
+
         if (config.getDynamicConfig().isEmpty()) {
             if (config.getProperty("destination.scheme").equals("https")) {
                 scheme = "https";
@@ -66,7 +78,7 @@ public class ThscpActor extends UntypedActor {
 
             host = config.getProperty("destination.host");
             portNumber = Integer.parseInt(config.getProperty("destination.api.port"));
-          //  path = config.getProperty("destination.api.path");
+
             switch (message) {
                 case RequestConstantUtils.DOS_PRODUCT_REQUEST:
                     path = config.getProperty("destination.api.path.dos_product");
@@ -108,7 +120,22 @@ public class ThscpActor extends UntypedActor {
 
             host = connectionProperties.getString("destinationHost");
             portNumber = connectionProperties.getInt("destinationPort");
-            //path = connectionProperties.getString("destinationPath");
+            scheme = connectionProperties.getString("destinationScheme");
+
+            if (connectionProperties.has("destinationUsername") && connectionProperties.has("destinationPassword")) {
+                username = connectionProperties.getString("destinationUsername");
+                password = connectionProperties.getString("destinationPassword");
+
+                // if we have a username and a password
+                // we want to add the username and password as the Basic Auth header in the HTTP request
+                if (username != null && !"".equals(username) && password != null && !"".equals(password)) {
+                    String auth = username + ":" + password;
+                    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.ISO_8859_1));
+                    String authHeader = "Basic " + new String(encodedAuth);
+                    headers.put(HttpHeaders.AUTHORIZATION, authHeader);
+                }
+            }
+
             switch (message) {
                 case RequestConstantUtils.DOS_PRODUCT_REQUEST:
                     path = config.getProperty("destinationPathDosProduct");
