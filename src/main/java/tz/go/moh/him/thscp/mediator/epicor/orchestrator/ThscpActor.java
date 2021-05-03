@@ -138,34 +138,34 @@ public class ThscpActor extends UntypedActor {
 
             switch (messageType) {
                 case RequestConstantUtils.DOS_PRODUCT_REQUEST:
-                    path = config.getProperty("destinationPathDosProduct");
+                    path = connectionProperties.getString("destinationPathDosProduct");
                     break;
                 case RequestConstantUtils.EMERGENCY_SUPPLY_CHAIN_COMMODITIES_STOCK_STATUS_REQUEST:
-                    path = config.getProperty("destinationPathEmergencySupplyChainCommoditiesStockStatus");
+                    path = connectionProperties.getString("destinationPathEmergencySupplyChainCommoditiesStockStatus");
                     break;
                 case RequestConstantUtils.HEALTH_COMMODITIES_FUNDING_REQUEST:
-                    path = config.getProperty("destinationPathHealthCommoditiesFunding");
+                    path = connectionProperties.getString("destinationPathHealthCommoditiesFunding");
                     break;
                 case RequestConstantUtils.ITEM_FILL_RATE_REQUEST:
-                    path = config.getProperty("destinationPathItemFillRate");
+                    path = connectionProperties.getString("destinationPathItemFillRate");
                     break;
                 case RequestConstantUtils.PERCENTAGE_HEALTH_FACILITIES_STAFF_REQUEST:
-                    path = config.getProperty("destinationPathPercentageHealthFacilitiesStaff");
+                    path = connectionProperties.getString("destinationPathPercentageHealthFacilitiesStaff");
                     break;
                 case RequestConstantUtils.PROCUREMENT_SUPPLY_PLAN_REQUEST:
-                    path = config.getProperty("destinationPathProcurementSupplyPlan");
+                    path = connectionProperties.getString("destinationPathProcurementSupplyPlan");
                     break;
                 case RequestConstantUtils.PRODUCT_RECALL_ALERTS_REQUEST:
-                    path = config.getProperty("destinationPathProductRecallAlerts");
+                    path = connectionProperties.getString("destinationPathProductRecallAlerts");
                     break;
                 case RequestConstantUtils.PROGRAM_LIST_REQUEST:
-                    path = config.getProperty("destinationPathProgramList");
+                    path = connectionProperties.getString("destinationPathProgramList");
                     break;
                 case RequestConstantUtils.STOCK_AVAILABILITY_REQUEST:
-                    path = config.getProperty("destinationPathStockAvailability");
+                    path = connectionProperties.getString("destinationPathStockAvailability");
                     break;
                 case RequestConstantUtils.STOCK_ON_HAND_PERCENTAGE_WASTAGE_REQUEST:
-                    path = config.getProperty("destinationPathStockOnHandPercentageWastage");
+                    path = connectionProperties.getString("destinationPathStockOnHandPercentageWastage");
                     break;
                 default:
                     path = null;
@@ -173,6 +173,7 @@ public class ThscpActor extends UntypedActor {
             }
 
             scheme = connectionProperties.getString("destinationScheme");
+        
         }
 
         List<Pair<String, String>> params = new ArrayList<>();
