@@ -79,7 +79,7 @@ public class ThscpActor extends UntypedActor {
             host = config.getProperty("destination.host");
             portNumber = Integer.parseInt(config.getProperty("destination.api.port"));
 
-            switch (message) {
+            switch (messageType) {
                 case RequestConstantUtils.DOS_PRODUCT_REQUEST:
                     path = config.getProperty("destination.api.path.dos_product");
                     break;
@@ -136,7 +136,7 @@ public class ThscpActor extends UntypedActor {
                 }
             }
 
-            switch (message) {
+            switch (messageType) {
                 case RequestConstantUtils.DOS_PRODUCT_REQUEST:
                     path = config.getProperty("destinationPathDosProduct");
                     break;

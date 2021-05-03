@@ -23,6 +23,10 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class MediatorMain {
+    /**
+     * Represents the mediator registration info.
+     */
+    private static final String MEDIATOR_REGISTRATION_INFO = "mediator-registration-info.json";
 
     private static RoutingTable buildRoutingTable() throws RoutingTable.RouteAlreadyMappedException {
         RoutingTable routingTable = new RoutingTable();
@@ -43,10 +47,6 @@ public class MediatorMain {
 
     private static StartupActorsConfig buildStartupActorsConfig() {
         StartupActorsConfig startupActors = new StartupActorsConfig();
-
-        //TODO Add own startup actors here
-        //...
-
         return startupActors;
     }
 
@@ -80,7 +80,7 @@ public class MediatorMain {
         config.setRoutingTable(buildRoutingTable());
         config.setStartupActors(buildStartupActorsConfig());
 
-        InputStream regInfo = MediatorMain.class.getClassLoader().getResourceAsStream("mediator-registration-info.json");
+        InputStream regInfo = MediatorMain.class.getClassLoader().getResourceAsStream(MEDIATOR_REGISTRATION_INFO);
         RegistrationConfig regConfig = new RegistrationConfig(regInfo);
         config.setRegistrationConfig(regConfig);
 
