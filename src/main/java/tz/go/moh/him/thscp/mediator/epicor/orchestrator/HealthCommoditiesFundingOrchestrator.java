@@ -89,10 +89,5 @@ public class HealthCommoditiesFundingOrchestrator extends BaseOrchestrator {
 
     }
 
-    protected List<HealthCommoditiesFundingRequest> convertMessageBodyToPojoList(String msg) throws JsonSyntaxException {
-        List<HealthCommoditiesFundingRequest> healthCommoditiesFundingRequestList = Arrays.asList(serializer.deserialize(msg, HealthCommoditiesFundingRequest[].class));
-        return healthCommoditiesFundingRequestList;
-    }
-
 }
 

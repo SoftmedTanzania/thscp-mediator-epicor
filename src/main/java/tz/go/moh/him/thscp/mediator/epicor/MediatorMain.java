@@ -27,8 +27,6 @@ public class MediatorMain {
     private static RoutingTable buildRoutingTable() throws RoutingTable.RouteAlreadyMappedException {
         RoutingTable routingTable = new RoutingTable();
 
-        //TODO Configure routes here
-        //...
         routingTable.addRoute("/thscp-health-commodities-funding", HealthCommoditiesFundingOrchestrator.class);
         routingTable.addRoute("/thscp-procurement-supply-plan", ProcurementSupplyPlanOrchestrator.class);
         routingTable.addRoute("/thscp-product-recall-alerts", ProductRecallAlertsOrchestrator.class);
