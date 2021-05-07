@@ -52,11 +52,11 @@ public class HealthCommoditiesFundingOrchestrator extends BaseOrchestrator {
 //            if (StringUtils.isBlank(String.valueOf(request.getProductCode())))
 //                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
 
-            if (StringUtils.isBlank(request.getProgram()))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "program"), null));
-
-            if (StringUtils.isBlank(request.getSource()))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "source"), null));
+//            if (StringUtils.isBlank(request.getProgram()))
+//                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "program"), null));
+//
+//            if (StringUtils.isBlank(request.getSource()))
+//                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "source"), null));
 
             if (StringUtils.isBlank(String.valueOf(request.getStartDate())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "startDate"), null));
