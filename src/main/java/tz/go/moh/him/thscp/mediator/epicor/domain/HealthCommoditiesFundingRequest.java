@@ -10,11 +10,11 @@ public class HealthCommoditiesFundingRequest {
 
     @JsonProperty("allocatedFund")
     @SerializedName("allocatedFund")
-    private int allocatedFund;
+    private long allocatedFund;
 
     @JsonProperty("disbursedFund")
     @SerializedName("disbursedFund")
-    private int disbursedFund;
+    private long disbursedFund;
 
     @JsonProperty("endDate")
     @SerializedName("endDate")
@@ -48,19 +48,19 @@ public class HealthCommoditiesFundingRequest {
         this.uuid = uuid;
     }
 
-    public int getAllocatedFund() {
+    public long getAllocatedFund() {
         return allocatedFund;
     }
 
-    public void setAllocatedFund(int allocatedFund) {
+    public void setAllocatedFund(long allocatedFund) {
         this.allocatedFund = allocatedFund;
     }
 
-    public int getDisbursedFund() {
+    public long getDisbursedFund() {
         return disbursedFund;
     }
 
-    public void setDisbursedFund(int disbursedFund) {
+    public void setDisbursedFund(long disbursedFund) {
         this.disbursedFund = disbursedFund;
     }
 
