@@ -1,6 +1,4 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
-
-import com.google.gson.JsonSyntaxException;
 import org.codehaus.plexus.util.StringUtils;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
@@ -51,8 +49,8 @@ public class HealthCommoditiesFundingOrchestrator extends BaseOrchestrator {
             if (StringUtils.isBlank(request.getFacilityId()))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "facilityId"), null));
 
-            if (StringUtils.isBlank(String.valueOf(request.getProductCode())))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
+//            if (StringUtils.isBlank(String.valueOf(request.getProductCode())))
+//                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
 
             if (StringUtils.isBlank(request.getProgram()))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "program"), null));
