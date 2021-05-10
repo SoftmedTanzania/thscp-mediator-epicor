@@ -36,6 +36,9 @@ public class ProductRecallAlertsOrchestrator extends BaseOrchestrator {
         ArrayList<ResultDetail> resultDetailsList = new ArrayList<>();
 
         for (ProductRecallAlertsRequest request : productRecallAlertsRequest) {
+            if (StringUtils.isBlank(request.getUuid()))
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "uuid"), null));
+
             if (StringUtils.isBlank(request.getActionRequired()))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "actionRequired"), null));
 
@@ -57,14 +60,23 @@ public class ProductRecallAlertsOrchestrator extends BaseOrchestrator {
             if (StringUtils.isBlank(request.getIssue()))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "issue"), null));
 
+            if (StringUtils.isBlank(request.getProductCode()))
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
+
             if (StringUtils.isBlank(request.getRecallDate()))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "recallDate"), null));
 
             if (StringUtils.isBlank(String.valueOf(request.getRecallFrequency())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "recallFrequency"), null));
 
+            if (StringUtils.isBlank(String.valueOf(request.getRecallOrganization())))
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "recallOrganization"), null));
+
             if (StringUtils.isBlank(String.valueOf(request.getRecalledQuantity())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "recallQuantity"), null));
+
+            if (StringUtils.isBlank(String.valueOf(request.getRegion())))
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "region"), null));
 
             if (StringUtils.isBlank(String.valueOf(request.getStartDate())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "startDate"), null));

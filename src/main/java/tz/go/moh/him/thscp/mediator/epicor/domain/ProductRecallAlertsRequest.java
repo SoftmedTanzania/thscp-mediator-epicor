@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProductRecallAlertsRequest {
 
+    @JsonProperty("uuid")
+    @SerializedName("uuid")
+    private String uuid;
+
     @JsonProperty("actionRequired")
     @SerializedName("actionRequired")
     private String actionRequired;
@@ -33,6 +37,10 @@ public class ProductRecallAlertsRequest {
     @SerializedName("issue")
     private String issue;
 
+    @JsonProperty("productCode")
+    @SerializedName("productCode")
+    private String productCode;
+
     @JsonProperty("recallDate")
     @SerializedName("recallDate")
     private String recallDate;
@@ -40,6 +48,10 @@ public class ProductRecallAlertsRequest {
     @JsonProperty("recallFrequency")
     @SerializedName("recallFrequency")
     private int recallFrequency;
+
+    @JsonProperty("recallOrganization")
+    @SerializedName("recallOrganization")
+    private String recallOrganization;
 
     @JsonProperty("recalledQuantity")
     @SerializedName("recalledQuantity")
@@ -49,6 +61,10 @@ public class ProductRecallAlertsRequest {
     @SerializedName("receivedQuantity")
     private int receivedQuantity;
 
+    @JsonProperty("region")
+    @SerializedName("region")
+    private String region;
+
     @JsonProperty("startDate")
     @SerializedName("startDate")
     private String startDate;
@@ -56,6 +72,14 @@ public class ProductRecallAlertsRequest {
     @JsonProperty("unit")
     @SerializedName("unit")
     private String unit;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getActionRequired() {
         return actionRequired;
@@ -113,6 +137,14 @@ public class ProductRecallAlertsRequest {
         this.issue = issue;
     }
 
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
     public String getRecallDate() {
         return recallDate;
     }
@@ -129,6 +161,14 @@ public class ProductRecallAlertsRequest {
         this.recallFrequency = recallFrequency;
     }
 
+    public String getRecallOrganization() {
+        return recallOrganization;
+    }
+
+    public void setRecallOrganization(String recallOrganization) {
+        this.recallOrganization = recallOrganization;
+    }
+
     public int getRecalledQuantity() {
         return recalledQuantity;
     }
@@ -143,6 +183,14 @@ public class ProductRecallAlertsRequest {
 
     public void setReceivedQuantity(int receivedQuantity) {
         this.receivedQuantity = receivedQuantity;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public String getStartDate() {
