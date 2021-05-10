@@ -19,7 +19,7 @@ public class ProcurementSupplyPlanRequest {
 
     @JsonProperty("lotAmount")
     @SerializedName("lotAmount")
-    private int lotAmount;
+    private long lotAmount;
 
     @JsonProperty("measureUnit")
     @SerializedName("measureUnit")
@@ -43,7 +43,7 @@ public class ProcurementSupplyPlanRequest {
 
     @JsonProperty("receivedAmount")
     @SerializedName("receivedAmount")
-    private int receivedAmount;
+    private long receivedAmount;
 
     @JsonProperty("receivedDate")
     @SerializedName("receivedDate")
@@ -82,12 +82,20 @@ public class ProcurementSupplyPlanRequest {
         this.currency = currency;
     }
 
-    public int getLotAmount() {
+    public long getLotAmount() {
         return lotAmount;
     }
 
-    public void setLotAmount(int lotAmount) {
+    public void setLotAmount(long lotAmount) {
         this.lotAmount = lotAmount;
+    }
+
+    public long getReceivedAmount() {
+        return receivedAmount;
+    }
+
+    public void setReceivedAmount(long receivedAmount) {
+        this.receivedAmount = receivedAmount;
     }
 
     public String getMeasureUnit() {
@@ -128,14 +136,6 @@ public class ProcurementSupplyPlanRequest {
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
-    }
-
-    public int getReceivedAmount() {
-        return receivedAmount;
-    }
-
-    public void setReceivedAmount(int receivedAmount) {
-        this.receivedAmount = receivedAmount;
     }
 
     public String getReceivedDate() {
