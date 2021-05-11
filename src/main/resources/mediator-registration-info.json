@@ -64,7 +64,7 @@
       "name": "Stock Availability Route",
       "host": "localhost",
       "port": "3021",
-      "path": "/thscp-stock-availability",
+      "path": "/thscp-epicor-stock-availability",
       "type": "http"
     },
     {
@@ -223,7 +223,7 @@
     },
     {
       "name": "Epicor - THSCP Stock Availability Channel",
-      "urlPattern": "^/thscp-stock-availability$",
+      "urlPattern": "^/thscp-epicor-stock-availability$",
       "type": "http",
       "allow": [
         "epicor-role"
@@ -233,7 +233,7 @@
           "name": "Stock Availability Route",
           "host": "localhost",
           "port": "3021",
-          "path": "/thscp-stock-availability",
+          "path": "/thscp-epicor-stock-availability",
           "type": "http",
           "primary": "true"
         }
