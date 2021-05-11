@@ -39,7 +39,7 @@ public class MediatorMain {
         routingTable.addRoute("/thscp-percentage-health-facilities-staff", PercentageHealthFacilitiesStaffOrchestrator.class);
         routingTable.addRoute("/thscp-dos-product", DosProductOrchestrator.class);
         routingTable.addRoute("/thscp-stock-on-hand-percentage-wastage", StockOnHandPercentageWastageOrchestrator.class);
-        routingTable.addRoute("/thscp-stock-availability", StockAvailabilityOrchestrator.class);
+        routingTable.addRoute("/thscp-epicor-stock-availability", StockAvailabilityOrchestrator.class);
         routingTable.addRoute("/thscp-program-list", ProgramListOrchestrator.class);
 
         return routingTable;
