@@ -55,8 +55,8 @@ public class DosProductOrchestrator extends BaseOrchestrator {
             if (StringUtils.isBlank(request.getPeriod()))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "period"), null));
 
-            if (StringUtils.isBlank(request.getProductClass()))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productClass"), null));
+//            if (StringUtils.isBlank(request.getProductClass()))
+//                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productClass"), null));
 
             if (StringUtils.isBlank(String.valueOf(request.getProductCode())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
