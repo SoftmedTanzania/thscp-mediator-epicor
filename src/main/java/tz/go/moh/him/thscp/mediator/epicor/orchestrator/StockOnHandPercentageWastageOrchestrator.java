@@ -73,8 +73,8 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
             if (StringUtils.isBlank(String.valueOf(request.getQuantity())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "quantity"), null));
 
-            if (StringUtils.isBlank(request.getStockId()))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "stockId"), null));
+//            if (StringUtils.isBlank(request.getStockId()))
+//                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "stockId"), null));
 
 
             try {
