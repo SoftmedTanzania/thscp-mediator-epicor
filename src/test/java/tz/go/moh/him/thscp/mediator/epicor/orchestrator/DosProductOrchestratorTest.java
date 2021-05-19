@@ -138,44 +138,4 @@ public class DosProductOrchestratorTest extends BaseTest{
             assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "category")));
         }};
     }
-
-    @Test
-    public void testInvalidDates() throws Exception {
-
-        assertNotNull(testConfig);
-
-        new JavaTestKit(system) {{
-            InputStream stream = DosProductOrchestratorTest.class.getClassLoader().getResourceAsStream("invalid-dates-dos-product-request.json");
-
-            assertNotNull(stream);
-
-            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), DosProductOrchestrator.class, "/dos-product");
-
-            final Object[] out =
-                    new ReceiveWhile<Object>(Object.class, duration("1 second")) {
-                        @Override
-                        protected Object match(Object msg) throws Exception {
-                            if (msg instanceof FinishRequest) {
-                                return msg;
-                            }
-                            throw noMatch();
-                        }
-                    }.get();
-
-            int responseStatus = 0;
-            String responseMessage = "";
-
-            for (Object o : out) {
-                if (o instanceof FinishRequest) {
-                    responseStatus = ((FinishRequest) o).getResponseStatus();
-                    responseMessage = ((FinishRequest) o).getResponse();
-                    break;
-                }
-            }
-
-            assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"period"), "2022-05-05")));
-        }};
-
-    }
 }
