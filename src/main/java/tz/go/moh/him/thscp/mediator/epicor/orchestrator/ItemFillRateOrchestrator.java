@@ -71,8 +71,8 @@ public class ItemFillRateOrchestrator extends BaseOrchestrator {
             if (StringUtils.isBlank(request.getProductCode()))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
 
-            if (StringUtils.isBlank(request.getProgramCode()))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "programCode"), null));
+//            if (StringUtils.isBlank(request.getProgramCode()))
+//                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "programCode"), null));
 
             if (StringUtils.isBlank(String.valueOf(request.getTargetDays())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "targetDays"), null));

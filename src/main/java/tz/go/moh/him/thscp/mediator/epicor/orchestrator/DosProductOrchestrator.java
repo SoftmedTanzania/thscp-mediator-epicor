@@ -55,8 +55,8 @@ public class DosProductOrchestrator extends BaseOrchestrator {
             if (StringUtils.isBlank(request.getPeriod()))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "period"), null));
 
-            if (StringUtils.isBlank(request.getProductClass()))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productClass"), null));
+//            if (StringUtils.isBlank(request.getProductClass()))
+//                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productClass"), null));
 
             if (StringUtils.isBlank(String.valueOf(request.getProductCode())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "productCode"), null));
@@ -67,17 +67,17 @@ public class DosProductOrchestrator extends BaseOrchestrator {
             if (StringUtils.isBlank(String.valueOf(request.getRegion())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "region"), null));
 
-            try {
-                if (!DateValidatorUtils.isValidPastDate(request.getPeriod(), checkDateFormatStrings(request.getPeriod()))) {
-                    resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "period"), null));
-                } else {
-                    SimpleDateFormat DosProductDateFormat = new SimpleDateFormat(checkDateFormatStrings(request.getPeriod()));
-                    request.setPeriod(thscpDateFormat.format(DosProductDateFormat.parse(request.getPeriod())));
-
-                }
-            } catch (ParseException e) {
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"), "period"), null));
-            }
+//            try {
+//                if (!DateValidatorUtils.isValidPastDate(request.getPeriod(), checkDateFormatStrings(request.getPeriod()))) {
+//                    resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "period"), null));
+//                } else {
+//                    SimpleDateFormat DosProductDateFormat = new SimpleDateFormat(checkDateFormatStrings(request.getPeriod()));
+//                    request.setPeriod(thscpDateFormat.format(DosProductDateFormat.parse(request.getPeriod())));
+//
+//                }
+//            } catch (ParseException e) {
+//                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("ERROR_INVALID_DATE_FORMAT"), "period"), null));
+//            }
         }
 
         return resultDetailsList;
