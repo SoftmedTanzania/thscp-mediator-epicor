@@ -49,14 +49,11 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
             if (StringUtils.isBlank(String.valueOf(request.getExpiredPercentage())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "expiredPercentage"), null));
 
-            if (StringUtils.isBlank(request.getFacilityId()))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "facilityId"), null));
+            if (StringUtils.isBlank(request.getMsdZoneCode()))
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "msdZoneCode"), null));
 
             if (StringUtils.isBlank(String.valueOf(request.getLostPercentage())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "lostPercentage"), null));
-
-            if (StringUtils.isBlank(String.valueOf(request.getFacilityLevel())))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "facilityLevel"), null));
 
             if (StringUtils.isBlank(String.valueOf(request.getMonthsOfStock())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "monthsOfStock"), null));
