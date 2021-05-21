@@ -135,7 +135,7 @@ public class StockOnHandPercentageWastageOrchestratorTest extends BaseTest{
 
             assertEquals(400, responseStatus);
             assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"),"uuid")));
-            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "facilityId")));
+            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "msdZoneCode")));
         }};
     }
 
