@@ -79,7 +79,7 @@
       "host": "localhost",
       "port": "3021",
       "path": "/thscp-supplier-on-time-delivery",
-      "type": "http",
+      "type": "http"
     }
   ],
 
