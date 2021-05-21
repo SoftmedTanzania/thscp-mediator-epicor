@@ -110,6 +110,9 @@ public class ThscpActor extends UntypedActor {
                 case RequestConstantUtils.STOCK_ON_HAND_PERCENTAGE_WASTAGE_REQUEST:
                     path = config.getProperty("destination.api.path.stock_on_hand_percentage_wastage");
                     break;
+                case RequestConstantUtils.SUPPLIER_ON_TIME_DELIVERY_REQUEST:
+                    path = config.getProperty("destination.api.path.supplier_on_time_delivery");
+                    break;
                 default:
                     path = null;
                     break;
@@ -166,6 +169,9 @@ public class ThscpActor extends UntypedActor {
                     break;
                 case RequestConstantUtils.STOCK_ON_HAND_PERCENTAGE_WASTAGE_REQUEST:
                     path = connectionProperties.getString("destinationPathStockOnHandPercentageWastage");
+                    break;
+                case RequestConstantUtils.SUPPLIER_ON_TIME_DELIVERY_REQUEST:
+                    path = connectionProperties.getString("destinationPathSupplierOnTimeDelivery");
                     break;
                 default:
                     path = null;

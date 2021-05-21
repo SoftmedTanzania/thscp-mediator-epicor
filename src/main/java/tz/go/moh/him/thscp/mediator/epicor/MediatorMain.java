@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.openhim.mediator.engine.*;
 import tz.go.moh.him.thscp.mediator.epicor.orchestrator.HealthCommoditiesFundingOrchestrator;
+import tz.go.moh.him.thscp.mediator.epicor.orchestrator.SupplierOnTimeDeliveryOrchestrator;
 import tz.go.moh.him.thscp.mediator.epicor.orchestrator.ProcurementSupplyPlanOrchestrator;
 import tz.go.moh.him.thscp.mediator.epicor.orchestrator.ProductRecallAlertsOrchestrator;
 import tz.go.moh.him.thscp.mediator.epicor.orchestrator.EmergencySupplyChainCommoditiesStockStatusOrchestrator;
@@ -41,6 +42,7 @@ public class MediatorMain {
         routingTable.addRoute("/thscp-stock-on-hand-percentage-wastage", StockOnHandPercentageWastageOrchestrator.class);
         routingTable.addRoute("/thscp-epicor-stock-availability", StockAvailabilityOrchestrator.class);
         routingTable.addRoute("/thscp-program-list", ProgramListOrchestrator.class);
+        routingTable.addRoute("/thscp-supplier-on-time-delivery", SupplierOnTimeDeliveryOrchestrator.class);
 
         return routingTable;
     }
