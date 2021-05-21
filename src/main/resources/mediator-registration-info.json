@@ -73,6 +73,13 @@
       "port": "3021",
       "path": "/thscp-program-list",
       "type": "http"
+    },
+    {
+      "name": "Supplier On Time Delivery Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-supplier-on-time-delivery",
+      "type": "http",
     }
   ],
 
@@ -256,6 +263,24 @@
           "primary": "true"
         }
       ]
+    },
+    {
+      "name": "Epicor - THSCP Supplier On Time Delivery Channel",
+      "urlPattern": "^/thscp-supplier-on-time-delivery$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Supplier On Time Delivery Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-supplier-on-time-delivery",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
     }
   ],
 
@@ -336,6 +361,12 @@
           "param": "destinationPathStockOnHandPercentageWastage",
           "displayName": "Destination Path for Stock On Hand Percentage Wastage",
           "description": "The destination path for receiving Stock On Hand Percentage Wastage",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathSupplierOnTimeDelivery",
+          "displayName": "Destination Path for Supplier On Time Delivery",
+          "description": "The destination path for receiving Supplier On Time Delivery",
           "type": "string"
         },
         {
