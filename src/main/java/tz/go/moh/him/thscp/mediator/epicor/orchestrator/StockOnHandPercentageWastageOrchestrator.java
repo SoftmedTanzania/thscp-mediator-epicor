@@ -50,7 +50,7 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "expiredPercentage"), null));
 
             if (StringUtils.isBlank(request.getMsdZoneCode()))
-                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "facilityId"), null));
+                resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "msdZoneCode"), null));
 
             if (StringUtils.isBlank(String.valueOf(request.getLostPercentage())))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "lostPercentage"), null));
