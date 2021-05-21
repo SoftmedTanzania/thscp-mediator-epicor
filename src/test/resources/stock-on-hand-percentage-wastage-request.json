@@ -3,8 +3,7 @@
   {
     "uuid": "5821daab-b583-4abf-a8b0-f0a6c414d7a5",
     "consumedQuantity": 10,
-    "facilityId": "106091-2",
-    "facilityLevel": 0,
+    "msdZoneCode": "MH",
     "monthsOfStock": 10,
     "period": "2020-12-07",
     "productCode": "PR-01",

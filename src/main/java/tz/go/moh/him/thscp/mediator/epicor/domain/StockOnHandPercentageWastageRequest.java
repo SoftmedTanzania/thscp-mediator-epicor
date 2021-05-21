@@ -25,17 +25,13 @@ public class StockOnHandPercentageWastageRequest {
     @SerializedName("expiredPercentage")
     private float expiredPercentage;
 
-    @JsonProperty("facilityId")
-    @SerializedName("facilityId")
-    private String facilityId;
+    @JsonProperty("msdZoneCode")
+    @SerializedName("msdZoneCode")
+    private String msdZoneCode;
 
     @JsonProperty("lostPercentage")
     @SerializedName("lostPercentage")
     private float lostPercentage;
-
-    @JsonProperty("facilityLevel")
-    @SerializedName("facilityLevel")
-    private int facilityLevel;
 
     @JsonProperty("monthsOfStock")
     @SerializedName("monthsOfStock")
@@ -101,12 +97,12 @@ public class StockOnHandPercentageWastageRequest {
         this.expiredPercentage = expiredPercentage;
     }
 
-    public String getFacilityId() {
-        return facilityId;
+    public String getMsdZoneCode() {
+        return msdZoneCode;
     }
 
-    public void setFacilityId(String facilityId) {
-        this.facilityId = facilityId;
+    public void setMsdZoneCode(String msdZoneCode) {
+        this.msdZoneCode = msdZoneCode;
     }
 
     public float getLostPercentage() {
@@ -115,14 +111,6 @@ public class StockOnHandPercentageWastageRequest {
 
     public void setLostPercentage(float lostPercentage) {
         this.lostPercentage = lostPercentage;
-    }
-
-    public int getFacilityLevel() {
-        return facilityLevel;
-    }
-
-    public void setFacilityLevel(int facilityLevel) {
-        this.facilityLevel = facilityLevel;
     }
 
     public int getMonthsOfStock() {

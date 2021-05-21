@@ -151,8 +151,7 @@ public class MockDestination extends MockHTTPConnector {
                 Assert.assertEquals(1, stockOnHandPercentageWastage.size());
                 Assert.assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockOnHandPercentageWastage.get(0).getUuid());
                 Assert.assertEquals(10, stockOnHandPercentageWastage.get(0).getConsumedQuantity());
-                Assert.assertEquals("106091-2", stockOnHandPercentageWastage.get(0).getFacilityId());
-                Assert.assertEquals(0, stockOnHandPercentageWastage.get(0).getFacilityLevel());
+                Assert.assertEquals("106091-2", stockOnHandPercentageWastage.get(0).getMsdZoneCode());
                 Assert.assertEquals("PR-01", stockOnHandPercentageWastage.get(0).getProductCode());
                 Assert.assertEquals(10, stockOnHandPercentageWastage.get(0).getMonthsOfStock());
                 Assert.assertEquals("PC-01", stockOnHandPercentageWastage.get(0).getProgramCode());
