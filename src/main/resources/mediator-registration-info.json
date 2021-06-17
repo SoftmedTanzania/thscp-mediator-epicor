@@ -1,7 +1,7 @@
 {
   "urn": "urn:uuid:e9c52bd0-7b2d-11eb-9972-515a77f92f82",
   "version": "0.1.0",
-  "name": "Epicor-THSCP",
+  "name": "Epicor - THSCP Mediator",
   "description": "A mediator for handling system integration between Epicor and THSCP",
   "endpoints": [
     {
