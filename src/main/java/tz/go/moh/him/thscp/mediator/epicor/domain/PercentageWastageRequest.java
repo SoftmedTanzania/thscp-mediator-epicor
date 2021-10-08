@@ -3,19 +3,11 @@ package tz.go.moh.him.thscp.mediator.epicor.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-public class StockOnHandPercentageWastageRequest {
+public class PercentageWastageRequest {
 
     @JsonProperty("uuid")
     @SerializedName("uuid")
     private String uuid;
-
-    @JsonProperty("consumedQuantity")
-    @SerializedName("consumedQuantity")
-    private int consumedQuantity;
-
-    @JsonProperty("actionRequired")
-    @SerializedName("actionRequired")
-    private String actionRequired;
 
     @JsonProperty("damagedPercentage")
     @SerializedName("damagedPercentage")
@@ -33,10 +25,6 @@ public class StockOnHandPercentageWastageRequest {
     @SerializedName("lostPercentage")
     private float lostPercentage;
 
-    @JsonProperty("monthsOfStock")
-    @SerializedName("monthsOfStock")
-    private int monthsOfStock;
-
     @JsonProperty("period")
     @SerializedName("period")
     private String period;
@@ -45,17 +33,9 @@ public class StockOnHandPercentageWastageRequest {
     @SerializedName("productCode")
     private String productCode;
 
-    @JsonProperty("programCode")
-    @SerializedName("programCode")
-    private String programCode;
-
     @JsonProperty("quantity")
     @SerializedName("quantity")
     private int quantity;
-
-    @JsonProperty("stockId")
-    @SerializedName("stockId")
-    private String stockId;
 
     public String getUuid() {
         return uuid;
@@ -63,22 +43,6 @@ public class StockOnHandPercentageWastageRequest {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
-    }
-
-    public int getConsumedQuantity() {
-        return consumedQuantity;
-    }
-
-    public void setConsumedQuantity(int consumedQuantity) {
-        this.consumedQuantity = consumedQuantity;
-    }
-
-    public String getActionRequired() {
-        return actionRequired;
-    }
-
-    public void setActionRequired(String actionRequired) {
-        this.actionRequired = actionRequired;
     }
 
     public float getDamagedPercentage() {
@@ -113,14 +77,6 @@ public class StockOnHandPercentageWastageRequest {
         this.lostPercentage = lostPercentage;
     }
 
-    public int getMonthsOfStock() {
-        return monthsOfStock;
-    }
-
-    public void setMonthsOfStock(int monthsOfStock) {
-        this.monthsOfStock = monthsOfStock;
-    }
-
     public String getPeriod() {
         return period;
     }
@@ -137,27 +93,11 @@ public class StockOnHandPercentageWastageRequest {
         this.productCode = productCode;
     }
 
-    public String getProgramCode() {
-        return programCode;
-    }
-
-    public void setProgramCode(String programCode) {
-        this.programCode = programCode;
-    }
-
     public int getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public String getStockId() {
-        return stockId;
-    }
-
-    public void setStockId(String stockId) {
-        this.stockId = stockId;
     }
 }

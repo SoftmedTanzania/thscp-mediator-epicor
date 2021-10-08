@@ -5,7 +5,7 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
-import tz.go.moh.him.thscp.mediator.epicor.domain.StockOnHandPercentageWastageRequest;
+import tz.go.moh.him.thscp.mediator.epicor.domain.StockOnHandRequest;
 import tz.go.moh.him.thscp.mediator.epicor.utils.RequestConstantUtils;
 
 import java.text.ParseException;
@@ -33,10 +33,10 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
      * @param stockOnHandPercentageWastageRequest to be validated
      * @return array list of validation results details for failed validations
      */
-    public List<ResultDetail> validateMessage(List<StockOnHandPercentageWastageRequest> stockOnHandPercentageWastageRequest) {
+    public List<ResultDetail> validateMessage(List<StockOnHandRequest> stockOnHandPercentageWastageRequest) {
         List<ResultDetail> resultDetailsList = new ArrayList<>();
 
-        for (StockOnHandPercentageWastageRequest request : stockOnHandPercentageWastageRequest) {
+        for (StockOnHandRequest request : stockOnHandPercentageWastageRequest) {
             if (StringUtils.isBlank(request.getUuid()))
                 resultDetailsList.add(new ResultDetail(ResultDetail.ResultsDetailsType.ERROR, String.format(errorMessageResource.getString("GENERIC_ERR"), "uuid"), null));
 
@@ -92,7 +92,7 @@ public class StockOnHandPercentageWastageOrchestrator extends BaseOrchestrator {
 
     @Override
     protected void onReceiveRequestInternal(MediatorHTTPRequest request) throws Exception {
-        List<StockOnHandPercentageWastageRequest> stockOnHandPercentageWastageRequest = Arrays.asList(serializer.deserialize(request.getBody(), StockOnHandPercentageWastageRequest[].class));
+        List<StockOnHandRequest> stockOnHandPercentageWastageRequest = Arrays.asList(serializer.deserialize(request.getBody(), StockOnHandRequest[].class));
 
         sendDataToThscp(stockOnHandPercentageWastageRequest, validateMessage(stockOnHandPercentageWastageRequest), RequestConstantUtils.STOCK_ON_HAND_PERCENTAGE_WASTAGE_REQUEST);
 

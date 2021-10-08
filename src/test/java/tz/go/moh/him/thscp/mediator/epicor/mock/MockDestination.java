@@ -8,7 +8,7 @@ import tz.go.moh.him.thscp.mediator.epicor.domain.DosProductRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.ProductRecallAlertsRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.ProgramListRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.StockAvailabilityRequest;
-import tz.go.moh.him.thscp.mediator.epicor.domain.StockOnHandPercentageWastageRequest;
+import tz.go.moh.him.thscp.mediator.epicor.domain.StockOnHandRequest;
 
 import java.util.Collections;
 import java.util.Map;
@@ -146,7 +146,7 @@ public class MockDestination extends MockHTTPConnector {
                 break;
 
             case "StockOnHandPercentageWastage":
-                List<StockOnHandPercentageWastageRequest> stockOnHandPercentageWastage= Arrays.asList(serializer.deserialize(msg.getBody(), StockOnHandPercentageWastageRequest[].class));
+                List<StockOnHandRequest> stockOnHandPercentageWastage= Arrays.asList(serializer.deserialize(msg.getBody(), StockOnHandRequest[].class));
                 Assert.assertNotNull(stockOnHandPercentageWastage);
                 Assert.assertEquals(1, stockOnHandPercentageWastage.size());
                 Assert.assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockOnHandPercentageWastage.get(0).getUuid());
