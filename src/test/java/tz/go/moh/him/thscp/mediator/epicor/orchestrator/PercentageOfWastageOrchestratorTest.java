@@ -6,20 +6,14 @@ import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Test;
 import org.openhim.mediator.engine.messages.FinishRequest;
-import org.openhim.mediator.engine.testing.MockLauncher;
 import org.openhim.mediator.engine.testing.TestingUtils;
-import tz.go.moh.him.thscp.mediator.epicor.mock.MockDestination;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedList;
-import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
-public class StockOnHandPercentageWastageOrchestratorTest extends BaseTest{
+public class PercentageOfWastageOrchestratorTest extends BaseTest {
 
     /**
      * Represents an Error Messages Definition Resource Object defined in <a href="file:../resources/error-messages.json">/resources/error-messages.json</a>.
@@ -41,9 +35,7 @@ public class StockOnHandPercentageWastageOrchestratorTest extends BaseTest{
             e.printStackTrace();
         }
 
-        List<MockLauncher.ActorToLaunch> toLaunch = new LinkedList<>();
-        toLaunch.add(new MockLauncher.ActorToLaunch("http-connector", MockDestination.class));
-        TestingUtils.launchActors(system, testConfig.getName(), toLaunch);
+        setupDestinationMock("PercentageOfWastage");
     }
 
     /**
@@ -65,12 +57,11 @@ public class StockOnHandPercentageWastageOrchestratorTest extends BaseTest{
     public void testMediatorHTTPRequest() throws Exception {
         assertNotNull(testConfig);
         new JavaTestKit(system) {{
-            InputStream stream = StockOnHandPercentageWastageOrchestratorTest.class.getClassLoader().getResourceAsStream("stock-on-hand-percentage-wastage-request.json");
+            InputStream stream = PercentageOfWastageOrchestratorTest.class.getClassLoader().getResourceAsStream("percentage-of-wastage-request.json");
 
             assertNotNull(stream);
 
-
-            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), StockOnHandPercentageWastageOrchestrator.class, "/stock-on-hand-percentage-wastage");
+            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), PercentageOfWastageOrchestrator.class, "/percentage-of-wastage");
 
             final Object[] out =
                     new ReceiveWhile<Object>(Object.class, duration("1 second")) {
@@ -105,11 +96,11 @@ public class StockOnHandPercentageWastageOrchestratorTest extends BaseTest{
         assertNotNull(testConfig);
 
         new JavaTestKit(system) {{
-            InputStream stream = StockOnHandPercentageWastageOrchestratorTest.class.getClassLoader().getResourceAsStream("invalid-stock-on-hand-percentage-wastage-request.json");
+            InputStream stream = PercentageOfWastageOrchestratorTest.class.getClassLoader().getResourceAsStream("invalid-percentage-of-wastage-request.json");
 
             assertNotNull(stream);
 
-            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), StockOnHandPercentageWastageOrchestrator.class, "/stock-on-hand-percentage-wastage");
+            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), PercentageOfWastageOrchestrator.class, "/percentage-of-wastage");
 
             final Object[] out =
                     new ReceiveWhile<Object>(Object.class, duration("1 second")) {
@@ -134,7 +125,7 @@ public class StockOnHandPercentageWastageOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"),"uuid")));
+            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "uuid")));
             assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "msdZoneCode")));
         }};
     }
@@ -145,11 +136,11 @@ public class StockOnHandPercentageWastageOrchestratorTest extends BaseTest{
         assertNotNull(testConfig);
 
         new JavaTestKit(system) {{
-            InputStream stream = StockOnHandPercentageWastageOrchestratorTest.class.getClassLoader().getResourceAsStream("invalid-dates-stock-on-hand-percentage-wastage-request.json");
+            InputStream stream = PercentageOfWastageOrchestratorTest.class.getClassLoader().getResourceAsStream("invalid-dates-percentage-of-wastage-request.json");
 
             assertNotNull(stream);
 
-            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), StockOnHandPercentageWastageOrchestrator.class, "/stock-on-hand-percentage-wastage");
+            createActorAndSendRequest(system, testConfig, getRef(), IOUtils.toString(stream), PercentageOfWastageOrchestrator.class, "/percentage-of-wastage");
 
             final Object[] out =
                     new ReceiveWhile<Object>(Object.class, duration("1 second")) {
@@ -174,7 +165,7 @@ public class StockOnHandPercentageWastageOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"period"), "2022-05-05")));
+            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "period"), "2022-05-05")));
         }};
 
     }

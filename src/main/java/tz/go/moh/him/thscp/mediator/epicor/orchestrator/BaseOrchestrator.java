@@ -1,16 +1,12 @@
 package tz.go.moh.him.thscp.mediator.epicor.orchestrator;
 
 import akka.actor.ActorRef;
-import akka.actor.ActorSelection;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import com.google.gson.Gson;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.json.JSONObject;
 import org.openhim.mediator.engine.MediatorConfig;
@@ -20,12 +16,14 @@ import org.openhim.mediator.engine.messages.SimpleMediatorRequest;
 import tz.go.moh.him.mediator.core.domain.ErrorMessage;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class BaseOrchestrator extends UntypedActor {
 
@@ -81,13 +79,13 @@ public abstract class BaseOrchestrator extends UntypedActor {
     }
 
     public static String checkDateFormatStrings(String dateString) {
-        List<String> formatStrings = Arrays.asList("yyyy-MM-dd HH:mm:ss:ms","yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", "yyyyMMdd");
+        List<String> formatStrings = Arrays.asList("yyyy-MM-dd HH:mm:ss:ms", "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", "yyyyMMdd");
         for (String formatString : formatStrings) {
             try {
                 new SimpleDateFormat(formatString).parse(dateString);
                 return formatString;
             } catch (ParseException e) {
-                  //e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 

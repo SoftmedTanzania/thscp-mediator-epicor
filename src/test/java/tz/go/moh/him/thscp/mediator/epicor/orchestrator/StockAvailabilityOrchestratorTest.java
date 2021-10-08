@@ -15,11 +15,9 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
-public class StockAvailabilityOrchestratorTest extends BaseTest{
+public class StockAvailabilityOrchestratorTest extends BaseTest {
     /**
      * Represents an Error Messages Definition Resource Object defined in <a href="file:../resources/error-messages.json">/resources/error-messages.json</a>.
      */
@@ -133,7 +131,7 @@ public class StockAvailabilityOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"),"uuid")));
+            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "uuid")));
             assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "district")));
         }};
     }
@@ -173,7 +171,7 @@ public class StockAvailabilityOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"period"), "2022-05-05")));
+            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "period"), "2022-05-05")));
         }};
 
     }

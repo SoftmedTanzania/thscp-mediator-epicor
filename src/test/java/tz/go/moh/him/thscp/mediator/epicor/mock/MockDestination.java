@@ -1,19 +1,15 @@
 package tz.go.moh.him.thscp.mediator.epicor.mock;
-import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
+
 import org.junit.Assert;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import org.openhim.mediator.engine.testing.MockHTTPConnector;
-import tz.go.moh.him.thscp.mediator.epicor.domain.HealthCommoditiesFundingRequest;
-import tz.go.moh.him.thscp.mediator.epicor.domain.DosProductRequest;
-import tz.go.moh.him.thscp.mediator.epicor.domain.ProductRecallAlertsRequest;
-import tz.go.moh.him.thscp.mediator.epicor.domain.ProgramListRequest;
-import tz.go.moh.him.thscp.mediator.epicor.domain.StockAvailabilityRequest;
-import tz.go.moh.him.thscp.mediator.epicor.domain.StockOnHandPercentageWastageRequest;
+import tz.go.moh.him.mediator.core.serialization.JsonSerializer;
+import tz.go.moh.him.thscp.mediator.epicor.domain.*;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.List;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -21,15 +17,18 @@ import java.util.Arrays;
  */
 public class MockDestination extends MockHTTPConnector {
     /**
+     * The expected message type
+     */
+    private final String expectedMessageType;
+    /**
      * serializer initialization
      */
     public JsonSerializer serializer = new JsonSerializer();
 
-    /**
-     * The expected message type
-     */
-    private final String expectedMessageType;
 
+    public MockDestination(String expectedMessageType) {
+        this.expectedMessageType = expectedMessageType;
+    }
 
     /**
      * Gets the response.
@@ -61,20 +60,16 @@ public class MockDestination extends MockHTTPConnector {
         return Collections.emptyMap();
     }
 
-
-    public MockDestination(String expectedMessageType) {
-        this.expectedMessageType = expectedMessageType;
-    }
     /**
      * Handles the message.
      *
      * @param msg The message.
      */
     @Override
-    public void executeOnReceive(MediatorHTTPRequest msg){
+    public void executeOnReceive(MediatorHTTPRequest msg) {
         System.out.println("Received body : " + msg.getBody());
 
-        switch(expectedMessageType) {
+        switch (expectedMessageType) {
             case "HealthCommoditiesFunding":
                 List<HealthCommoditiesFundingRequest> healthCommoditiesFunding = Arrays.asList(serializer.deserialize(msg.getBody(), HealthCommoditiesFundingRequest[].class));
                 Assert.assertNotNull(healthCommoditiesFunding);
@@ -110,7 +105,7 @@ public class MockDestination extends MockHTTPConnector {
                 Assert.assertNotNull(ProductRecallAlerts);
                 Assert.assertEquals(1, ProductRecallAlerts.size());
                 Assert.assertEquals("action1", ProductRecallAlerts.get(0).getActionRequired());
-                Assert.assertEquals("rai" ,ProductRecallAlerts.get(0).getAffectedCommunity());
+                Assert.assertEquals("rai", ProductRecallAlerts.get(0).getAffectedCommunity());
                 Assert.assertEquals("02", ProductRecallAlerts.get(0).getBatchNumber());
                 Assert.assertEquals("2020-11-27", ProductRecallAlerts.get(0).getClosureDate());
                 Assert.assertEquals("this is action", ProductRecallAlerts.get(0).getDescription());
@@ -145,27 +140,35 @@ public class MockDestination extends MockHTTPConnector {
                 Assert.assertEquals("COVID", stockAvailability.get(0).getProgram());
                 break;
 
-            case "StockOnHandPercentageWastage":
-                List<StockOnHandPercentageWastageRequest> stockOnHandPercentageWastage= Arrays.asList(serializer.deserialize(msg.getBody(), StockOnHandPercentageWastageRequest[].class));
-                Assert.assertNotNull(stockOnHandPercentageWastage);
-                Assert.assertEquals(1, stockOnHandPercentageWastage.size());
-                Assert.assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockOnHandPercentageWastage.get(0).getUuid());
-                Assert.assertEquals(10, stockOnHandPercentageWastage.get(0).getConsumedQuantity());
-                Assert.assertEquals("106091-2", stockOnHandPercentageWastage.get(0).getMsdZoneCode());
-                Assert.assertEquals("PR-01", stockOnHandPercentageWastage.get(0).getProductCode());
-                Assert.assertEquals(10, stockOnHandPercentageWastage.get(0).getMonthsOfStock());
-                Assert.assertEquals("PC-01", stockOnHandPercentageWastage.get(0).getProgramCode());
-                Assert.assertEquals(100, stockOnHandPercentageWastage.get(0).getQuantity());
-                Assert.assertEquals("001", stockOnHandPercentageWastage.get(0).getStockId());
-                Assert.assertEquals(30, stockOnHandPercentageWastage.get(0).getDamagedPercentage());
-                Assert.assertEquals(30, stockOnHandPercentageWastage.get(0).getExpiredPercentage());
-                Assert.assertEquals("40", stockOnHandPercentageWastage.get(0).getLostPercentage());
+            case "StockOnHand":
+                List<StockOnHandRequest> stockOnHandRequest = Arrays.asList(serializer.deserialize(msg.getBody(), StockOnHandRequest[].class));
+                Assert.assertNotNull(stockOnHandRequest);
+                Assert.assertEquals(1, stockOnHandRequest.size());
+                Assert.assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", stockOnHandRequest.get(0).getUuid());
+                Assert.assertEquals(10, stockOnHandRequest.get(0).getConsumedQuantity());
+                Assert.assertEquals("MH", stockOnHandRequest.get(0).getMsdZoneCode());
+                Assert.assertEquals("10010330", stockOnHandRequest.get(0).getProductCode());
+                Assert.assertEquals(0, stockOnHandRequest.get(0).getMonthsOfStock());
+                Assert.assertEquals(178, stockOnHandRequest.get(0).getQuantity());
+                break;
+
+            case "PercentageOfWastage":
+                List<PercentageOfWastageRequest> percentageOfWastageRequests = Arrays.asList(serializer.deserialize(msg.getBody(), PercentageOfWastageRequest[].class));
+                Assert.assertNotNull(percentageOfWastageRequests);
+                Assert.assertEquals(1, percentageOfWastageRequests.size());
+                Assert.assertEquals("5821daab-b583-4abf-a8b0-f0a6c414d7a5", percentageOfWastageRequests.get(0).getUuid());
+                Assert.assertEquals("MH", percentageOfWastageRequests.get(0).getMsdZoneCode());
+                Assert.assertEquals("10010330", percentageOfWastageRequests.get(0).getProductCode());
+                Assert.assertEquals(178, percentageOfWastageRequests.get(0).getQuantity());
+                Assert.assertEquals(0, percentageOfWastageRequests.get(0).getDamagedPercentage());
+                Assert.assertEquals(10, percentageOfWastageRequests.get(0).getExpiredPercentage());
+                Assert.assertEquals(0, percentageOfWastageRequests.get(0).getLostPercentage());
+                Assert.assertEquals("2021-05-19", percentageOfWastageRequests.get(0).getPeriod());
                 break;
             default:
                 break;
 
         }
-
 
 
     }

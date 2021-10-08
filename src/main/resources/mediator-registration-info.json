@@ -54,10 +54,17 @@
       "type": "http"
     },
     {
-      "name": "Stock On Hand And Percentage Wastage Route",
+      "name": "Stock On Hand Route",
       "host": "localhost",
       "port": "3021",
-      "path": "/thscp-stock-on-hand-percentage-wastage",
+      "path": "/thscp-stock-on-hand",
+      "type": "http"
+    },
+    {
+      "name": "Percentage Of Wastage Route",
+      "host": "localhost",
+      "port": "3021",
+      "path": "/thscp-percentage-of-wastage",
       "type": "http"
     },
     {
@@ -211,18 +218,36 @@
       ]
     },
     {
-      "name": "Epicor - THSCP Stock On Hand And Percentage Wastage Channel",
-      "urlPattern": "^/thscp-stock-on-hand-percentage-wastage$",
+      "name": "Epicor - THSCP Stock On Hand Channel",
+      "urlPattern": "^/epicor10-thscp-stock-on-hand$",
       "type": "http",
       "allow": [
         "epicor-role"
       ],
       "routes": [
         {
-          "name": "Stock On Hand And Percentage Wastage Route",
+          "name": "Stock On Hand Route",
           "host": "localhost",
           "port": "3021",
-          "path": "/thscp-stock-on-hand-percentage-wastage",
+          "path": "/thscp-stock-on-hand",
+          "type": "http",
+          "primary": "true"
+        }
+      ]
+    },
+    {
+      "name": "Epicor - THSCP Percentage Of Wastage Channel",
+      "urlPattern": "^/epicor10-thscp-percentage-of-wastage$",
+      "type": "http",
+      "allow": [
+        "epicor-role"
+      ],
+      "routes": [
+        {
+          "name": "Percentage Of Wastage Route",
+          "host": "localhost",
+          "port": "3021",
+          "path": "/thscp-percentage-of-wastage",
           "type": "http",
           "primary": "true"
         }
@@ -358,9 +383,15 @@
           "type": "string"
         },
         {
-          "param": "destinationPathStockOnHandPercentageWastage",
-          "displayName": "Destination Path for Stock On Hand Percentage Wastage",
-          "description": "The destination path for receiving Stock On Hand Percentage Wastage",
+          "param": "destinationPathStockOnHand",
+          "displayName": "Destination Path for Stock On Hand",
+          "description": "The destination path for receiving Stock On Hand",
+          "type": "string"
+        },
+        {
+          "param": "destinationPathPercentageOfWastage",
+          "displayName": "Destination Path for Percentage of Wastage",
+          "description": "The destination path for receiving Percentage of Wastage",
           "type": "string"
         },
         {

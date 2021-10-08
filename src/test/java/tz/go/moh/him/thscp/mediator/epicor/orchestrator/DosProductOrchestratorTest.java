@@ -15,11 +15,9 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
-public class DosProductOrchestratorTest extends BaseTest{
+public class DosProductOrchestratorTest extends BaseTest {
 
     /**
      * Represents an Error Messages Definition Resource Object defined in <a href="file:../resources/error-messages.json">/resources/error-messages.json</a>.
@@ -134,7 +132,7 @@ public class DosProductOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"),"uuid")));
+            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "uuid")));
             assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "category")));
         }};
     }

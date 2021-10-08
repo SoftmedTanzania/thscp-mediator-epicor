@@ -6,17 +6,7 @@ import akka.event.LoggingAdapter;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.openhim.mediator.engine.*;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.HealthCommoditiesFundingOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.SupplierOnTimeDeliveryOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.ProcurementSupplyPlanOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.ProductRecallAlertsOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.EmergencySupplyChainCommoditiesStockStatusOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.ItemFillRateOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.PercentageHealthFacilitiesStaffOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.DosProductOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.StockOnHandPercentageWastageOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.StockAvailabilityOrchestrator;
-import tz.go.moh.him.thscp.mediator.epicor.orchestrator.ProgramListOrchestrator;
+import tz.go.moh.him.thscp.mediator.epicor.orchestrator.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +29,8 @@ public class MediatorMain {
         routingTable.addRoute("/thscp-item-fill-rate", ItemFillRateOrchestrator.class);
         routingTable.addRoute("/thscp-percentage-health-facilities-staff", PercentageHealthFacilitiesStaffOrchestrator.class);
         routingTable.addRoute("/thscp-dos-product", DosProductOrchestrator.class);
-        routingTable.addRoute("/thscp-stock-on-hand-percentage-wastage", StockOnHandPercentageWastageOrchestrator.class);
+        routingTable.addRoute("/thscp-stock-on-hand", StockOnHandOrchestrator.class);
+        routingTable.addRoute("/thscp-percentage-of-wastage", PercentageOfWastageOrchestrator.class);
         routingTable.addRoute("/thscp-epicor-stock-availability", StockAvailabilityOrchestrator.class);
         routingTable.addRoute("/thscp-program-list", ProgramListOrchestrator.class);
         routingTable.addRoute("/thscp-supplier-on-time-delivery", SupplierOnTimeDeliveryOrchestrator.class);

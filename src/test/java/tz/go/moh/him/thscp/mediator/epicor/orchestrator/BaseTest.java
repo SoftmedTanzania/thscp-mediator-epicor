@@ -16,11 +16,11 @@ import org.openhim.mediator.engine.testing.TestingUtils;
 import tz.go.moh.him.thscp.mediator.epicor.MediatorMain;
 import tz.go.moh.him.thscp.mediator.epicor.mock.CustomMockLauncher;
 import tz.go.moh.him.thscp.mediator.epicor.mock.MockDestination;
+
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 
 
 public class BaseTest {
@@ -99,14 +99,14 @@ public class BaseTest {
                 path,
                 payload,
                 headers,
-                Collections.<Pair<String, String>>emptyList()
+                Collections.emptyList()
         );
 
         orchestratorActor.tell(POST_Request, sender);
     }
 
     /**
-     * Sets up the hdr mock actor with the expected message type
+     * Sets up the thscp mock actor with the expected message type
      *
      * @param expectedMessageType to be verified by the hdr mock in the received request body
      */

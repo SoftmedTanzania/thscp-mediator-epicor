@@ -107,8 +107,11 @@ public class ThscpActor extends UntypedActor {
                 case RequestConstantUtils.STOCK_AVAILABILITY_REQUEST:
                     path = config.getProperty("destination.api.path.stock_availability");
                     break;
-                case RequestConstantUtils.STOCK_ON_HAND_PERCENTAGE_WASTAGE_REQUEST:
-                    path = config.getProperty("destination.api.path.stock_on_hand_percentage_wastage");
+                case RequestConstantUtils.STOCK_ON_HAND_REQUEST:
+                    path = config.getProperty("destination.api.path.stock_on_hand");
+                    break;
+                case RequestConstantUtils.PERCENTAGE_OF_WASTAGE_REQUEST:
+                    path = config.getProperty("destination.api.path.percentage_of_wastage");
                     break;
                 case RequestConstantUtils.SUPPLIER_ON_TIME_DELIVERY_REQUEST:
                     path = config.getProperty("destination.api.path.supplier_on_time_delivery");
@@ -167,8 +170,11 @@ public class ThscpActor extends UntypedActor {
                 case RequestConstantUtils.STOCK_AVAILABILITY_REQUEST:
                     path = connectionProperties.getString("destinationPathStockAvailability");
                     break;
-                case RequestConstantUtils.STOCK_ON_HAND_PERCENTAGE_WASTAGE_REQUEST:
-                    path = connectionProperties.getString("destinationPathStockOnHandPercentageWastage");
+                case RequestConstantUtils.STOCK_ON_HAND_REQUEST:
+                    path = connectionProperties.getString("destinationPathStockOnHand");
+                    break;
+                case RequestConstantUtils.PERCENTAGE_OF_WASTAGE_REQUEST:
+                    path = connectionProperties.getString("destinationPathPercentageOfWastage");
                     break;
                 case RequestConstantUtils.SUPPLIER_ON_TIME_DELIVERY_REQUEST:
                     path = connectionProperties.getString("destinationPathSupplierOnTimeDelivery");
@@ -179,7 +185,7 @@ public class ThscpActor extends UntypedActor {
             }
 
             scheme = connectionProperties.getString("destinationScheme");
-        
+
         }
 
         List<Pair<String, String>> params = new ArrayList<>();

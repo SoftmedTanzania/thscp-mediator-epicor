@@ -11,6 +11,7 @@ public class RequestConstantUtils {
     public static final String PRODUCT_RECALL_ALERTS_REQUEST = "ProductRecallAlertsRequest";
     public static final String PROGRAM_LIST_REQUEST = "ProgramListRequest";
     public static final String STOCK_AVAILABILITY_REQUEST = "StockAvailabilityRequest";
-    public static final String STOCK_ON_HAND_PERCENTAGE_WASTAGE_REQUEST = "StockOnHandPercentageWastageRequest";
+    public static final String STOCK_ON_HAND_REQUEST = "StockOnHandRequest";
+    public static final String PERCENTAGE_OF_WASTAGE_REQUEST = "PercentageOfWastageRequest";
 
 }

@@ -5,7 +5,6 @@ import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
 import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
-import tz.go.moh.him.thscp.mediator.epicor.domain.ItemFillRateRequest;
 import tz.go.moh.him.thscp.mediator.epicor.domain.SupplierOnTimeDeliveryRequest;
 import tz.go.moh.him.thscp.mediator.epicor.utils.RequestConstantUtils;
 
