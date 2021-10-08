@@ -106,7 +106,7 @@ public class BaseTest {
     }
 
     /**
-     * Sets up the hdr mock actor with the expected message type
+     * Sets up the thscp mock actor with the expected message type
      *
      * @param expectedMessageType to be verified by the hdr mock in the received request body
      */
