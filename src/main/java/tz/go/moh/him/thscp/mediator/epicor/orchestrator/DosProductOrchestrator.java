@@ -4,12 +4,9 @@ import org.codehaus.plexus.util.StringUtils;
 import org.openhim.mediator.engine.MediatorConfig;
 import org.openhim.mediator.engine.messages.MediatorHTTPRequest;
 import tz.go.moh.him.mediator.core.domain.ResultDetail;
-import tz.go.moh.him.mediator.core.validator.DateValidatorUtils;
 import tz.go.moh.him.thscp.mediator.epicor.domain.DosProductRequest;
 import tz.go.moh.him.thscp.mediator.epicor.utils.RequestConstantUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

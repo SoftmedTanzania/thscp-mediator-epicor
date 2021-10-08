@@ -11,11 +11,9 @@ import org.openhim.mediator.engine.testing.TestingUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
-public class StockOnHandOrchestratorTest extends BaseTest{
+public class StockOnHandOrchestratorTest extends BaseTest {
 
     /**
      * Represents an Error Messages Definition Resource Object defined in <a href="file:../resources/error-messages.json">/resources/error-messages.json</a>.
@@ -128,7 +126,7 @@ public class StockOnHandOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"),"uuid")));
+            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "uuid")));
             assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "msdZoneCode")));
         }};
     }
@@ -168,7 +166,7 @@ public class StockOnHandOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"period"), "2022-05-05")));
+            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "period"), "2022-05-05")));
         }};
 
     }

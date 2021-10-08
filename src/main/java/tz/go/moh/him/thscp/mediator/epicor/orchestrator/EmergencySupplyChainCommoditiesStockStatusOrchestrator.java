@@ -25,7 +25,7 @@ public class EmergencySupplyChainCommoditiesStockStatusOrchestrator extends Base
     public EmergencySupplyChainCommoditiesStockStatusOrchestrator(MediatorConfig config) {
         super(config);
     }
-    
+
     /**
      * Validate HealthCommodityFundingRequest Required Fields
      *

@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openhim.mediator.engine.MediatorConfig;
 import tz.go.moh.him.thscp.mediator.epicor.MediatorMain;
+
 import java.lang.reflect.Method;
 
 public class MediatorMainTest {

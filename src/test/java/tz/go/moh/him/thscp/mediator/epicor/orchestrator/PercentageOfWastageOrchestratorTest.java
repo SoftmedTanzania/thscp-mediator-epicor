@@ -6,18 +6,14 @@ import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Test;
 import org.openhim.mediator.engine.messages.FinishRequest;
-import org.openhim.mediator.engine.testing.MockLauncher;
 import org.openhim.mediator.engine.testing.TestingUtils;
-import tz.go.moh.him.thscp.mediator.epicor.mock.MockDestination;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class PercentageOfWastageOrchestratorTest extends BaseTest{
+public class PercentageOfWastageOrchestratorTest extends BaseTest {
 
     /**
      * Represents an Error Messages Definition Resource Object defined in <a href="file:../resources/error-messages.json">/resources/error-messages.json</a>.
@@ -129,7 +125,7 @@ public class PercentageOfWastageOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"),"uuid")));
+            assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "uuid")));
             assertTrue(responseMessage.contains(String.format(thscpErrorMessageResource.getString("GENERIC_ERR"), "msdZoneCode")));
         }};
     }
@@ -169,7 +165,7 @@ public class PercentageOfWastageOrchestratorTest extends BaseTest{
             }
 
             assertEquals(400, responseStatus);
-            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"),"period"), "2022-05-05")));
+            assertTrue(responseMessage.contains(String.format(String.format(thscpErrorMessageResource.getString("ERROR_DATE_IS_NOT_VALID_PAST_DATE"), "period"), "2022-05-05")));
         }};
 
     }

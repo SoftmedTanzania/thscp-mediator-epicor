@@ -185,7 +185,7 @@ public class ThscpActor extends UntypedActor {
             }
 
             scheme = connectionProperties.getString("destinationScheme");
-        
+
         }
 
         List<Pair<String, String>> params = new ArrayList<>();

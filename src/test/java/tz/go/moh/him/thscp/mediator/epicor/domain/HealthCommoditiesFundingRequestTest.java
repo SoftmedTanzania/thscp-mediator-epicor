@@ -1,6 +1,8 @@
 package tz.go.moh.him.thscp.mediator.epicor.domain;
+
 import com.google.gson.Gson;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class HealthCommoditiesFundingRequestTest {
