@@ -3,7 +3,7 @@ package tz.go.moh.him.thscp.mediator.epicor.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
-public class PercentageWastageRequest {
+public class PercentageOfWastageRequest {
 
     @JsonProperty("uuid")
     @SerializedName("uuid")
